@@ -1,17 +1,15 @@
 import { useState } from "react";
 import { Link } from "react-router";
 import AuthLayout from "../layouts/auth.layout";
+import { useAlert } from "../components/alert.component";
+import type { LoginForm } from "../models/login";
 
 
 
 export function LoginPage() {
-
-    const [form, setForm] = useState<LoginForm>({ email: "", password: "" });
+    const { showAlert, AlertComponent } = useAlert();
+    const [form, setForm] = useState<LoginForm>({ username: "", password: "" });
     const [show, setShow] = useState<boolean>(false);
-    interface LoginForm {
-        email: string;
-        password: string;
-    }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
         setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -19,8 +17,14 @@ export function LoginPage() {
 
     const handleSubmit = (e: React.BaseSyntheticEvent): void => {
         e.preventDefault();
+
+        showAlert({
+            variant: "success",
+            title: "Sukses",
+            message: "lorem ipsum"
+        })
         // handle login logic here
-        console.log("Login:", form);
+        // console.log("Login:", form);
     };
 
     return (
@@ -30,16 +34,17 @@ export function LoginPage() {
             flip={true}>
             <div>
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-                    {/* Email */}
+                    {AlertComponent}
+                    {/* Username */}
                     <div className="flex flex-col gap-1.5">
                         <label className="text-xs font-black uppercase tracking-widest text-zinc-400">
-                            Email
+                            username
                         </label>
                         <input
-                            name="email"
-                            type="email"
+                            name="username"
+                            type="text"
                             required
-                            value={form.email}
+                            value={form.username}
                             onChange={handleChange}
                             placeholder="you@example.com"
                             className="bg-zinc-800 border border-zinc-700 rounded-sm px-4 py-3 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-blue-400 transition-colors"
@@ -72,7 +77,7 @@ export function LoginPage() {
                             <button
                                 type="button"
                                 onClick={() => setShow((prev) => !prev)}
-                                className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-white text-xs transition-colors"
+                                className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-blue-600 text-xs transition-colors"
                             >
                                 {show ? "HIDE" : "SHOW"}
                             </button>

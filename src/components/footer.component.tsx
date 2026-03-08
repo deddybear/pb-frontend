@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import IconComponent from "./icon.component";
 
 interface SocialLink {
   label: string;
@@ -19,9 +20,9 @@ export default function Footer() {
 
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 group">
-          <div className="w-8 h-8 bg-blue-400 rounded-sm rotate-12 group-hover:rotate-0 transition-transform duration-300" />
+          <IconComponent/>
           <span className="text-white font-black text-xl tracking-tight uppercase">
-            Point Blank <span className="text-blue-400">PS</span>
+            Point Blank <span className="text-blue-400">ITKI</span>
           </span>
         </Link>
 

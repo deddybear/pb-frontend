@@ -3,9 +3,9 @@ import App from "../App";
 import { LoginPage } from "../pages/login.page";
 import RegisterPage from "../pages/register.page";
 import HomePage from "../pages/home.page";
-import DashboardLayout from "../layouts/dashboard.layout";
-import DashboardPages from "../pages/dashboard.page";
-// import LoginPage from "../pages/login-page";
+// import DashboardLayout from "../layouts/dashboard.layout";
+// import DashboardPages from "../pages/dashboard.page";
+import NotFoundPage from "../pages/notfound.page";
 
 export const router = createBrowserRouter([
     {
@@ -18,12 +18,15 @@ export const router = createBrowserRouter([
         ]
 
     },
-    {
-        path: "/dashboard",
-        Component: DashboardLayout,
-        children: [
-            { index: true, Component: DashboardPages },
-        ]
+    // {
+    //     path: "/dashboard",
+    //     Component: DashboardLayout,
+    //     children: [
+    //         { index: true, Component: DashboardPages },
+    //     ]
 
+    // },
+    {
+        path: "*", element: <NotFoundPage/>
     }
 ]);

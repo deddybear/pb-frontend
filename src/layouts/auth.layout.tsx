@@ -19,7 +19,7 @@ export default function AuthLayout({ heading, sub, flip, children }: AuthLayoutP
                             <IconComponent />
                         </div>
                         <span className="text-white font-black text-xl tracking-tight uppercase">
-                            Point Blank <span className="text-blue-400">PS</span>
+                            Point Blank <span className="text-blue-400">ITKI</span>
                         </span>
                     </Link>
 
@@ -64,7 +64,7 @@ export default function AuthLayout({ heading, sub, flip, children }: AuthLayoutP
                     {/* Headline */}
                     <p className="text-white font-black text-3xl uppercase tracking-tight leading-tight">
                         Point Blank<br />
-                        <span className="text-blue-400">Private Server.</span>
+                        <span className="text-blue-400">ITKI.</span>
                     </p>
                     <p className="text-zinc-500 text-sm mt-4 leading-relaxed">
                         Server stabil, lag minimal, gratis selamanya. Rasakan pengalaman bermain Point Blank tanpa batas.

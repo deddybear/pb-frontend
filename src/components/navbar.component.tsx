@@ -11,7 +11,7 @@ const navLinks: NavLink[] = [
     { label: "Home", to: "/" },
     { label: "Login", to: "/login" },
     { label: "Register", to: "/register" },
-    { label: "Dashboard", to: "/dashboard" },
+    // { label: "Dashboard", to: "/dashboard" },
 ];
 
 export default function NavbarComponent() {
