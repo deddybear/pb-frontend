@@ -19,9 +19,9 @@ export default function Footer() {
 
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 group">
-          <div className="w-8 h-8 bg-amber-400 rounded-sm rotate-12 group-hover:rotate-0 transition-transform duration-300" />
+          <div className="w-8 h-8 bg-blue-400 rounded-sm rotate-12 group-hover:rotate-0 transition-transform duration-300" />
           <span className="text-white font-black text-xl tracking-tight uppercase">
-            Point Blank <span className="text-amber-400">PS</span>
+            Point Blank <span className="text-blue-400">PS</span>
           </span>
         </Link>
 
@@ -32,7 +32,7 @@ export default function Footer() {
               key={s.label}
               href={s.href}
               aria-label={s.label}
-              className="px-4 py-2 rounded-sm bg-zinc-800 text-zinc-400 text-xs font-black uppercase tracking-widest hover:bg-amber-400 hover:text-zinc-950 transition-all duration-200"
+              className="px-4 py-2 rounded-sm bg-zinc-800 text-zinc-400 text-xs font-black uppercase tracking-widest hover:bg-blue-400 hover:text-zinc-950 transition-all duration-200"
             >
               {s.label}
             </a>

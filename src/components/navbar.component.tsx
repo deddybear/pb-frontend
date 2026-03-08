@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router";
+import IconComponent from "./icon.component";
 
 interface NavLink {
     label: string;
@@ -23,31 +24,11 @@ export default function NavbarComponent() {
                 {/* Logo */}
                 <Link to="/" className="flex items-center gap-2 group">
                     <div className="w-8 h-8 rounded-sm rotate-12 group-hover:rotate-0 transition-transform duration-300">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 64 64"
-                            className="w-12 h-12 relative z-10"
-                            fill="none"
-                        >
-                            {/* Skull head */}
-                            <path
-                                d="M32 6C18 6 10 15 10 26c0 7 4 13 10 16v6h4v-4h4v4h8v-4h4v4h4v-6c6-3 10-9 10-16C54 15 46 6 32 6z"
-                                fill="#fbbf24"
-                            />
-                            {/* Left eye */}
-                            <ellipse cx="24" cy="26" rx="5" ry="6" fill="#18181b" />
-                            {/* Right eye */}
-                            <ellipse cx="40" cy="26" rx="5" ry="6" fill="#18181b" />
-                            {/* Nose */}
-                            <path d="M30 34 L32 30 L34 34 Z" fill="#18181b" />
-                            {/* Teeth dividers */}
-                            <line x1="28" y1="48" x2="28" y2="42" stroke="#18181b" strokeWidth="2" />
-                            <line x1="36" y1="48" x2="36" y2="42" stroke="#18181b" strokeWidth="2" />
-                        </svg>
+                        <IconComponent />
                     </div>
                     
                     <span className="text-white font-black text-xl tracking-tight uppercase">
-                        <span className="text-amber-400">PB </span> ITKI
+                        <span className="text-blue-400">PB </span> ITKI
                     </span>
                 </Link>
 
@@ -61,7 +42,7 @@ export default function NavbarComponent() {
                                     to={link.to}
                                     className={`px-4 py-2 text-sm font-semibold uppercase tracking-widest transition-all duration-200 rounded-sm
                     ${active
-                                            ? "bg-amber-400 text-zinc-950"
+                                            ? "bg-blue-400 text-zinc-950"
                                             : "text-zinc-400 hover:text-white hover:bg-zinc-800"
                                         }`}
                                 >
@@ -82,7 +63,7 @@ export default function NavbarComponent() {
                     </Link>
                     <Link
                         to="/register"
-                        className="text-sm font-black uppercase tracking-widest px-5 py-2 bg-amber-400 text-zinc-950 hover:bg-amber-300 transition-colors rounded-sm"
+                        className="text-sm font-black uppercase tracking-widest px-5 py-2 bg-blue-400 text-zinc-950 hover:bg-blue-300 transition-colors rounded-sm"
                     >
                         Get Started
                     </Link>
@@ -111,7 +92,7 @@ export default function NavbarComponent() {
                                 to={link.to}
                                 onClick={() => setOpen(false)}
                                 className={`px-4 py-3 text-sm font-semibold uppercase tracking-widest rounded-sm transition-all
-                  ${active ? "bg-amber-400 text-zinc-950" : "text-zinc-400 hover:text-white hover:bg-zinc-800"}`}
+                  ${active ? "bg-blue-400 text-zinc-950" : "text-zinc-400 hover:text-white hover:bg-zinc-800"}`}
                             >
                                 {link.label}
                             </Link>
@@ -128,7 +109,7 @@ export default function NavbarComponent() {
                         {/* <Link
                             to="/register"
                             onClick={() => setOpen(false)}
-                            className="px-4 py-3 text-sm font-black uppercase tracking-widest bg-amber-400 text-zinc-950 text-center rounded-sm"
+                            className="px-4 py-3 text-sm font-black uppercase tracking-widest bg-blue-400 text-zinc-950 text-center rounded-sm"
                         >
                             Get Started
                         </Link> */}

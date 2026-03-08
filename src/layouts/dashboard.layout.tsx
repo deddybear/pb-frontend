@@ -44,7 +44,7 @@ export default function DashboardLayout() {
                             aria-label="Notifications"
                         >
                             <span className="text-sm">◎</span>
-                            <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-amber-400 rounded-full" />
+                            <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-blue-400 rounded-full" />
                         </button>
 
                         {/* Search */}
@@ -55,7 +55,7 @@ export default function DashboardLayout() {
                         </div>
 
                         {/* Avatar */}
-                        <div className="w-9 h-9 rounded-sm bg-amber-400 flex items-center justify-center text-zinc-950 font-black text-sm cursor-pointer hover:bg-amber-300 transition-colors">
+                        <div className="w-9 h-9 rounded-sm bg-blue-400 flex items-center justify-center text-zinc-950 font-black text-sm cursor-pointer hover:bg-blue-300 transition-colors">
                             JD
                         </div>
                     </div>

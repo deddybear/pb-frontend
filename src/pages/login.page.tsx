@@ -42,7 +42,7 @@ export function LoginPage() {
                             value={form.email}
                             onChange={handleChange}
                             placeholder="you@example.com"
-                            className="bg-zinc-800 border border-zinc-700 rounded-sm px-4 py-3 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-amber-400 transition-colors"
+                            className="bg-zinc-800 border border-zinc-700 rounded-sm px-4 py-3 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-blue-400 transition-colors"
                         />
                     </div>
 
@@ -54,7 +54,7 @@ export function LoginPage() {
                             </label>
                             <Link
                                 to="/forgot-password"
-                                className="text-xs text-zinc-500 hover:text-amber-400 transition-colors"
+                                className="text-xs text-zinc-500 hover:text-blue-400 transition-colors"
                             >
                                 Forgot password?
                             </Link>
@@ -67,7 +67,7 @@ export function LoginPage() {
                                 value={form.password}
                                 onChange={handleChange}
                                 placeholder="••••••••"
-                                className="w-full bg-zinc-800 border border-zinc-700 rounded-sm px-4 py-3 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-amber-400 transition-colors pr-12"
+                                className="w-full bg-zinc-800 border border-zinc-700 rounded-sm px-4 py-3 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-blue-400 transition-colors pr-12"
                             />
                             <button
                                 type="button"
@@ -81,7 +81,7 @@ export function LoginPage() {
 
                     <button
                         type="submit"
-                        className="w-full py-3 bg-amber-400 text-zinc-950 font-black text-sm uppercase tracking-widest rounded-sm hover:bg-amber-300 transition-colors mt-2"
+                        className="w-full py-3 bg-blue-400 text-zinc-950 font-black text-sm uppercase tracking-widest rounded-sm hover:bg-blue-300 transition-colors mt-2"
                     >
                         Log In →
                     </button>
@@ -89,7 +89,7 @@ export function LoginPage() {
 
                     <p className="text-center text-zinc-600 text-sm">
                         Don't have an account?{" "}
-                        <Link to="/register" className="text-amber-400 font-semibold hover:text-amber-300 transition-colors">
+                        <Link to="/register" className="text-blue-400 font-semibold hover:text-blue-300 transition-colors">
                             Sign up
                         </Link>
                     </p>

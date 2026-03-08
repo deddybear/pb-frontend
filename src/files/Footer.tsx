@@ -46,9 +46,9 @@ export default function Footer(): JSX.Element {
           {/* Brand */}
           <div className="lg:col-span-2">
             <Link to="/" className="flex items-center gap-2 group w-fit mb-4">
-              <div className="w-8 h-8 bg-amber-400 rounded-sm rotate-12 group-hover:rotate-0 transition-transform duration-300" />
+              <div className="w-8 h-8 bg-blue-400 rounded-sm rotate-12 group-hover:rotate-0 transition-transform duration-300" />
               <span className="text-white font-black text-xl tracking-tight uppercase">
-                Volt<span className="text-amber-400">UI</span>
+                Volt<span className="text-blue-400">UI</span>
               </span>
             </Link>
             <p className="text-zinc-500 text-sm leading-relaxed max-w-xs">
@@ -60,7 +60,7 @@ export default function Footer(): JSX.Element {
                 <a
                   key={s.label}
                   href={s.href}
-                  className="w-9 h-9 flex items-center justify-center rounded-sm bg-zinc-800 text-zinc-400 hover:bg-amber-400 hover:text-zinc-950 transition-all duration-200 text-xs font-black"
+                  className="w-9 h-9 flex items-center justify-center rounded-sm bg-zinc-800 text-zinc-400 hover:bg-blue-400 hover:text-zinc-950 transition-all duration-200 text-xs font-black"
                   aria-label={s.label}
                 >
                   {s.label}
@@ -80,7 +80,7 @@ export default function Footer(): JSX.Element {
                   <li key={link.to}>
                     <Link
                       to={link.to}
-                      className="text-zinc-500 text-sm hover:text-amber-400 transition-colors duration-150"
+                      className="text-zinc-500 text-sm hover:text-blue-400 transition-colors duration-150"
                     >
                       {link.label}
                     </Link>

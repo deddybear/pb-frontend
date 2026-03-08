@@ -56,7 +56,7 @@ export function LoginPage(): JSX.Element {
             value={form.email}
             onChange={handleChange}
             placeholder="you@example.com"
-            className="bg-zinc-800 border border-zinc-700 rounded-sm px-4 py-3 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-amber-400 transition-colors"
+            className="bg-zinc-800 border border-zinc-700 rounded-sm px-4 py-3 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-blue-400 transition-colors"
           />
         </div>
 
@@ -68,7 +68,7 @@ export function LoginPage(): JSX.Element {
             </label>
             <Link
               to="/forgot-password"
-              className="text-xs text-zinc-500 hover:text-amber-400 transition-colors"
+              className="text-xs text-zinc-500 hover:text-blue-400 transition-colors"
             >
               Forgot password?
             </Link>
@@ -81,7 +81,7 @@ export function LoginPage(): JSX.Element {
               value={form.password}
               onChange={handleChange}
               placeholder="••••••••"
-              className="w-full bg-zinc-800 border border-zinc-700 rounded-sm px-4 py-3 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-amber-400 transition-colors pr-12"
+              className="w-full bg-zinc-800 border border-zinc-700 rounded-sm px-4 py-3 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-blue-400 transition-colors pr-12"
             />
             <button
               type="button"
@@ -95,7 +95,7 @@ export function LoginPage(): JSX.Element {
 
         <button
           type="submit"
-          className="w-full py-3 bg-amber-400 text-zinc-950 font-black text-sm uppercase tracking-widest rounded-sm hover:bg-amber-300 transition-colors mt-2"
+          className="w-full py-3 bg-blue-400 text-zinc-950 font-black text-sm uppercase tracking-widest rounded-sm hover:bg-blue-300 transition-colors mt-2"
         >
           Log In →
         </button>
@@ -115,7 +115,7 @@ export function LoginPage(): JSX.Element {
 
         <p className="text-center text-zinc-600 text-sm">
           Don't have an account?{" "}
-          <Link to="/register" className="text-amber-400 font-semibold hover:text-amber-300 transition-colors">
+          <Link to="/register" className="text-blue-400 font-semibold hover:text-blue-300 transition-colors">
             Sign up
           </Link>
         </p>
@@ -157,7 +157,7 @@ export function RegisterPage(): JSX.Element {
             value={form.name}
             onChange={handleChange}
             placeholder="John Doe"
-            className="bg-zinc-800 border border-zinc-700 rounded-sm px-4 py-3 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-amber-400 transition-colors"
+            className="bg-zinc-800 border border-zinc-700 rounded-sm px-4 py-3 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-blue-400 transition-colors"
           />
         </div>
 
@@ -173,7 +173,7 @@ export function RegisterPage(): JSX.Element {
             value={form.email}
             onChange={handleChange}
             placeholder="you@example.com"
-            className="bg-zinc-800 border border-zinc-700 rounded-sm px-4 py-3 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-amber-400 transition-colors"
+            className="bg-zinc-800 border border-zinc-700 rounded-sm px-4 py-3 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-blue-400 transition-colors"
           />
         </div>
 
@@ -189,20 +189,20 @@ export function RegisterPage(): JSX.Element {
             value={form.password}
             onChange={handleChange}
             placeholder="Min. 8 characters"
-            className="bg-zinc-800 border border-zinc-700 rounded-sm px-4 py-3 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-amber-400 transition-colors"
+            className="bg-zinc-800 border border-zinc-700 rounded-sm px-4 py-3 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-blue-400 transition-colors"
           />
         </div>
 
         <p className="text-zinc-600 text-xs">
           By signing up you agree to our{" "}
-          <Link to="/terms" className="text-amber-400 hover:text-amber-300">Terms</Link>{" "}
+          <Link to="/terms" className="text-blue-400 hover:text-blue-300">Terms</Link>{" "}
           and{" "}
-          <Link to="/privacy" className="text-amber-400 hover:text-amber-300">Privacy Policy</Link>.
+          <Link to="/privacy" className="text-blue-400 hover:text-blue-300">Privacy Policy</Link>.
         </p>
 
         <button
           type="submit"
-          className="w-full py-3 bg-amber-400 text-zinc-950 font-black text-sm uppercase tracking-widest rounded-sm hover:bg-amber-300 transition-colors"
+          className="w-full py-3 bg-blue-400 text-zinc-950 font-black text-sm uppercase tracking-widest rounded-sm hover:bg-blue-300 transition-colors"
         >
           Create Account →
         </button>
@@ -222,7 +222,7 @@ export function RegisterPage(): JSX.Element {
 
         <p className="text-center text-zinc-600 text-sm">
           Already have an account?{" "}
-          <Link to="/login" className="text-amber-400 font-semibold hover:text-amber-300 transition-colors">
+          <Link to="/login" className="text-blue-400 font-semibold hover:text-blue-300 transition-colors">
             Log in
           </Link>
         </p>
@@ -240,9 +240,9 @@ function AuthLayout({ heading, sub, flip, children }: AuthLayoutProps): JSX.Elem
       <div className={`w-full lg:w-1/2 flex flex-col justify-center px-6 py-12 sm:px-12 ${flip ? "lg:order-2" : "lg:order-1"}`}>
         <div className="w-full max-w-md mx-auto">
           <Link to="/" className="flex items-center gap-2 group mb-10 w-fit">
-            <div className="w-8 h-8 bg-amber-400 rounded-sm rotate-12 group-hover:rotate-0 transition-transform duration-300" />
+            <div className="w-8 h-8 bg-blue-400 rounded-sm rotate-12 group-hover:rotate-0 transition-transform duration-300" />
             <span className="text-white font-black text-xl tracking-tight uppercase">
-              Volt<span className="text-amber-400">UI</span>
+              Volt<span className="text-blue-400">UI</span>
             </span>
           </Link>
 
@@ -265,12 +265,12 @@ function AuthLayout({ heading, sub, flip, children }: AuthLayoutProps): JSX.Elem
             backgroundSize: "40px 40px",
           }}
         />
-        <div className="absolute top-16 right-16 w-32 h-32 bg-amber-400/10 rotate-12 rounded-sm" />
-        <div className="absolute bottom-20 left-12 w-20 h-20 border-4 border-amber-400/20 rotate-45 rounded-sm" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-amber-400/5 rounded-full" />
+        <div className="absolute top-16 right-16 w-32 h-32 bg-blue-400/10 rotate-12 rounded-sm" />
+        <div className="absolute bottom-20 left-12 w-20 h-20 border-4 border-blue-400/20 rotate-45 rounded-sm" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-blue-400/5 rounded-full" />
 
         <div className="relative z-10 text-center px-12">
-          <div className="w-20 h-20 bg-amber-400 rounded-sm rotate-12 mx-auto mb-6" />
+          <div className="w-20 h-20 bg-blue-400 rounded-sm rotate-12 mx-auto mb-6" />
           <p className="text-white font-black text-2xl uppercase tracking-tight leading-tight">
             Build Fast.<br />Ship Bold.
           </p>
@@ -282,7 +282,7 @@ function AuthLayout({ heading, sub, flip, children }: AuthLayoutProps): JSX.Elem
               "VoltUI cut our design time in half. The layouts are sharp and everything just works."
             </p>
             <div className="flex items-center gap-3 mt-4">
-              <div className="w-8 h-8 bg-amber-400/20 rounded-sm flex items-center justify-center text-amber-400 text-xs font-black">
+              <div className="w-8 h-8 bg-blue-400/20 rounded-sm flex items-center justify-center text-blue-400 text-xs font-black">
                 AR
               </div>
               <div>

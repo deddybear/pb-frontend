@@ -22,9 +22,9 @@ export default function Navbar(): JSX.Element {
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 group">
-          <div className="w-8 h-8 bg-amber-400 rounded-sm rotate-12 group-hover:rotate-0 transition-transform duration-300" />
+          <div className="w-8 h-8 bg-blue-400 rounded-sm rotate-12 group-hover:rotate-0 transition-transform duration-300" />
           <span className="text-white font-black text-xl tracking-tight uppercase">
-            Volt<span className="text-amber-400">UI</span>
+            Volt<span className="text-blue-400">UI</span>
           </span>
         </Link>
 
@@ -38,7 +38,7 @@ export default function Navbar(): JSX.Element {
                   to={link.to}
                   className={`px-4 py-2 text-sm font-semibold uppercase tracking-widest transition-all duration-200 rounded-sm
                     ${active
-                      ? "bg-amber-400 text-zinc-950"
+                      ? "bg-blue-400 text-zinc-950"
                       : "text-zinc-400 hover:text-white hover:bg-zinc-800"
                     }`}
                 >
@@ -59,7 +59,7 @@ export default function Navbar(): JSX.Element {
           </Link>
           <Link
             to="/register"
-            className="text-sm font-black uppercase tracking-widest px-5 py-2 bg-amber-400 text-zinc-950 hover:bg-amber-300 transition-colors rounded-sm"
+            className="text-sm font-black uppercase tracking-widest px-5 py-2 bg-blue-400 text-zinc-950 hover:bg-blue-300 transition-colors rounded-sm"
           >
             Get Started
           </Link>
@@ -88,7 +88,7 @@ export default function Navbar(): JSX.Element {
                 to={link.to}
                 onClick={() => setOpen(false)}
                 className={`px-4 py-3 text-sm font-semibold uppercase tracking-widest rounded-sm transition-all
-                  ${active ? "bg-amber-400 text-zinc-950" : "text-zinc-400 hover:text-white hover:bg-zinc-800"}`}
+                  ${active ? "bg-blue-400 text-zinc-950" : "text-zinc-400 hover:text-white hover:bg-zinc-800"}`}
               >
                 {link.label}
               </Link>
@@ -105,7 +105,7 @@ export default function Navbar(): JSX.Element {
             <Link
               to="/register"
               onClick={() => setOpen(false)}
-              className="px-4 py-3 text-sm font-black uppercase tracking-widest bg-amber-400 text-zinc-950 text-center rounded-sm"
+              className="px-4 py-3 text-sm font-black uppercase tracking-widest bg-blue-400 text-zinc-950 text-center rounded-sm"
             >
               Get Started
             </Link>

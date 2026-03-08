@@ -5,7 +5,7 @@ export default function DashboardPages() {
             <div className="flex items-center gap-2 mb-6 text-xs uppercase tracking-widest text-zinc-600">
                 <span className="hover:text-zinc-400 cursor-pointer transition-colors">Home</span>
                 <span>›</span>
-                <span className="text-amber-400">Dashboard</span>
+                <span className="text-blue-400">Dashboard</span>
             </div>
 
             {/* Page heading */}
@@ -18,7 +18,7 @@ export default function DashboardPages() {
                         Welcome back, John. Here's what's happening.
                     </p>
                 </div>
-                <button className="px-5 py-2.5 bg-amber-400 text-zinc-950 font-black text-sm uppercase tracking-widest rounded-sm hover:bg-amber-300 transition-colors shrink-0">
+                <button className="px-5 py-2.5 bg-blue-400 text-zinc-950 font-black text-sm uppercase tracking-widest rounded-sm hover:bg-blue-300 transition-colors shrink-0">
                     + New Project
                 </button>
             </div>

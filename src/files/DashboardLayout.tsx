@@ -44,7 +44,7 @@ export default function DashboardLayout(): JSX.Element {
               aria-label="Notifications"
             >
               <span className="text-sm">◎</span>
-              <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-amber-400 rounded-full" />
+              <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-blue-400 rounded-full" />
             </button>
 
             {/* Search */}
@@ -55,7 +55,7 @@ export default function DashboardLayout(): JSX.Element {
             </div>
 
             {/* Avatar */}
-            <div className="w-9 h-9 rounded-sm bg-amber-400 flex items-center justify-center text-zinc-950 font-black text-sm cursor-pointer hover:bg-amber-300 transition-colors">
+            <div className="w-9 h-9 rounded-sm bg-blue-400 flex items-center justify-center text-zinc-950 font-black text-sm cursor-pointer hover:bg-blue-300 transition-colors">
               JD
             </div>
           </div>
@@ -67,7 +67,7 @@ export default function DashboardLayout(): JSX.Element {
           <div className="flex items-center gap-2 mb-6 text-xs uppercase tracking-widest text-zinc-600">
             <span className="hover:text-zinc-400 cursor-pointer transition-colors">Home</span>
             <span>›</span>
-            <span className="text-amber-400">Dashboard</span>
+            <span className="text-blue-400">Dashboard</span>
           </div>
 
           {/* Page heading */}
@@ -80,7 +80,7 @@ export default function DashboardLayout(): JSX.Element {
                 Welcome back, John. Here's what's happening.
               </p>
             </div>
-            <button className="px-5 py-2.5 bg-amber-400 text-zinc-950 font-black text-sm uppercase tracking-widest rounded-sm hover:bg-amber-300 transition-colors shrink-0">
+            <button className="px-5 py-2.5 bg-blue-400 text-zinc-950 font-black text-sm uppercase tracking-widest rounded-sm hover:bg-blue-300 transition-colors shrink-0">
               + New Project
             </button>
           </div>

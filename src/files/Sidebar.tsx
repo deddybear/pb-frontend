@@ -61,10 +61,10 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps): JSX.Elem
       >
         {/* Logo */}
         <div className="h-16 flex items-center border-b border-zinc-800 px-4 gap-3 shrink-0">
-          <div className="w-8 h-8 bg-amber-400 rounded-sm rotate-12 shrink-0" />
+          <div className="w-8 h-8 bg-blue-400 rounded-sm rotate-12 shrink-0" />
           {!collapsed && (
             <span className="text-white font-black text-lg tracking-tight uppercase whitespace-nowrap overflow-hidden">
-              Volt<span className="text-amber-400">UI</span>
+              Volt<span className="text-blue-400">UI</span>
             </span>
           )}
         </div>
@@ -88,11 +88,11 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps): JSX.Elem
                         title={collapsed ? item.label : undefined}
                         className={`flex items-center gap-3 px-3 py-2.5 rounded-sm text-sm font-semibold transition-all duration-150 group
                           ${active
-                            ? "bg-amber-400 text-zinc-950"
+                            ? "bg-blue-400 text-zinc-950"
                             : "text-zinc-400 hover:bg-zinc-800 hover:text-white"
                           }`}
                       >
-                        <span className={`text-base shrink-0 ${active ? "text-zinc-950" : "text-amber-400"}`}>
+                        <span className={`text-base shrink-0 ${active ? "text-zinc-950" : "text-blue-400"}`}>
                           {item.icon}
                         </span>
                         {!collapsed && (
@@ -112,7 +112,7 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps): JSX.Elem
         {/* User */}
         <div className="border-t border-zinc-800 p-3 shrink-0">
           <div className="flex items-center gap-3 px-2 py-2 rounded-sm hover:bg-zinc-800 cursor-pointer transition-colors">
-            <div className="w-8 h-8 rounded-sm bg-amber-400 flex items-center justify-center text-zinc-950 font-black text-sm shrink-0">
+            <div className="w-8 h-8 rounded-sm bg-blue-400 flex items-center justify-center text-zinc-950 font-black text-sm shrink-0">
               JD
             </div>
             {!collapsed && (
