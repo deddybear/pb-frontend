@@ -1,5 +1,5 @@
-import { useState, type JSX } from "react";
-import type { AlertProps, AlertState, AlertVariant, UseAlertReturn } from "../models/alert";
+import { type JSX } from "react";
+import type { AlertProps, AlertVariant} from "../models/alert.model";
 
 
 // ─── Config per variant ───────────────────────────────────────────────────────
@@ -106,23 +106,3 @@ export function Alert({ variant, title, message, onClose }: AlertProps): JSX.Ele
   );
 }
 
-// ─── useAlert hook (opsional, untuk kemudahan pakai) ─────────────────────────
-
-
-export function useAlert(): UseAlertReturn {
-  const [alert, setAlert] = useState<AlertState | null>(null);
-
-  const showAlert = (data: AlertState): void => setAlert(data);
-  const hideAlert = (): void => setAlert(null);
-
-  const AlertComponent = alert ? (
-    <Alert
-      variant={alert.variant}
-      title={alert.title}
-      message={alert.message}
-      onClose={hideAlert}
-    />
-  ) : null;
-
-  return { alert, showAlert, hideAlert, AlertComponent };
-}

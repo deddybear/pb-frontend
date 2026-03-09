@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import { type JSX } from "react";
 import IconComponent from "./icon.component";
 
 interface SocialLink {
@@ -13,7 +14,7 @@ const socials: SocialLink[] = [
   { label: "YT", href: "#" },
 ];
 
-export default function Footer() {
+export default function Footer() : JSX.Element {
   return (
     <footer className="bg-zinc-950 border-t border-zinc-800">
       <div className="max-w-7xl mx-auto px-4 py-10 flex flex-col items-center gap-6">

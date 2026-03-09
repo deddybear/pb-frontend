@@ -1,3 +1,4 @@
+import { type JSX } from "react";
 import { Link } from "react-router";
 import IconComponent from "../components/icon.component";
 
@@ -8,7 +9,7 @@ interface AuthLayoutProps {
     children: React.ReactNode;
 }
 
-export default function AuthLayout({ heading, sub, flip, children }: AuthLayoutProps) {
+export default function AuthLayout({ heading, sub, flip, children }: AuthLayoutProps) : JSX.Element {
     return (
         <div className="min-h-screen bg-zinc-900 flex">
             {/* Form side */}

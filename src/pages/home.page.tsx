@@ -1,6 +1,7 @@
 import { Link } from "react-router";
+import { type JSX } from "react";
 
-export default function HomePage() {
+export default function HomePage() : JSX.Element {
 
     return (
         <div className="min-h-screen bg-zinc-900 flex flex-col">

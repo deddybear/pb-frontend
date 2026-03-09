@@ -1,4 +1,6 @@
-export default function DashboardPages() {
+import { type JSX } from "react";
+
+export default function DashboardPages() : JSX.Element {
     return (
         <div>
             {/* Breadcrumb */}
