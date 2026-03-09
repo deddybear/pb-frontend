@@ -1,8 +1,6 @@
 import { type JSX } from "react";
 import { installSteps, specs } from "../models/download.model";
 
-
-
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export default function DownloadPage(): JSX.Element {
@@ -129,7 +127,7 @@ export default function DownloadPage(): JSX.Element {
             {/* Badge versi */}
             <div className="inline-flex items-center gap-2 bg-zinc-900 border border-zinc-700 rounded-sm px-4 py-1.5 text-xs font-black uppercase tracking-widest text-blue-400 mb-6">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              Latest Version — v2.4.1
+              Latest Version — v3.6.8
             </div>
 
             <h1 className="text-white font-black text-5xl sm:text-6xl lg:text-7xl uppercase tracking-tighter leading-none mb-4">
@@ -163,7 +161,7 @@ export default function DownloadPage(): JSX.Element {
               </span>
               <span className="flex items-center gap-1.5">
                 <span className="w-1 h-1 bg-zinc-700 rounded-full" />
-                Update: 07 Mar 2026
+                Update: 01 Jan 2026
               </span>
               <span className="flex items-center gap-1.5">
                 <span className="w-1 h-1 bg-zinc-700 rounded-full" />

@@ -1,14 +1,30 @@
-import { type JSX } from "react";
+import { useEffect, type JSX } from "react";
+import { useNavigate, useOutletContext } from "react-router";
+import { useAuth } from "../../hooks/useAuth.hook";
+import { type DashboardOutletContext } from "../../models/dashboard.model"; 
+import BreadcrumbComponent from "../../components/breadcump.component";
+import { GetSession } from "../../services/session.service";
 
-export default function DashboardPages() : JSX.Element {
+export default function DashboardPages(): JSX.Element {
+    const { setPageTitle } = useOutletContext<DashboardOutletContext>();
+    const auth = useAuth();
+    const navigate = useNavigate();
+
+    if (auth.dataAccount == null) {
+        navigate("/");
+    }
+
+    auth.setDataLogin(GetSession());
+
+
+    useEffect(() => {
+        setPageTitle("Dashboard")
+    }, [setPageTitle]);
+
     return (
         <div>
             {/* Breadcrumb */}
-            <div className="flex items-center gap-2 mb-6 text-xs uppercase tracking-widest text-zinc-600">
-                <span className="hover:text-zinc-400 cursor-pointer transition-colors">Home</span>
-                <span>›</span>
-                <span className="text-blue-400">Dashboard</span>
-            </div>
+            <BreadcrumbComponent />
 
             {/* Page heading */}
             <div className="mb-8 flex items-start justify-between gap-4 flex-wrap">
@@ -17,16 +33,13 @@ export default function DashboardPages() : JSX.Element {
                         Overview
                     </h1>
                     <p className="text-zinc-500 mt-1 text-sm">
-                        Welcome back, John. Here's what's happening.
+                        Welcome back, {auth.dataAccount?.username}. Here's what's happening.
                     </p>
                 </div>
-                <button className="px-5 py-2.5 bg-blue-400 text-zinc-950 font-black text-sm uppercase tracking-widest rounded-sm hover:bg-blue-300 transition-colors shrink-0">
-                    + New Project
-                </button>
             </div>
 
             {/* Stats grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-8">
+            {/* <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-8">
                 {[
                     { label: "Total Revenue", value: "$48,295", delta: "+12.5%", up: true },
                     { label: "Active Users", value: "3,842", delta: "+8.1%", up: true },
@@ -46,7 +59,7 @@ export default function DashboardPages() : JSX.Element {
                         </p>
                     </div>
                 ))}
-            </div>
+            </div> */}
         </div>
     );
 }

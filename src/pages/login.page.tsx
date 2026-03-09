@@ -1,24 +1,27 @@
 import { useState, type JSX } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import AuthLayout from "../layouts/auth.layout";
 import { useAlert } from "../hooks/useAlert.hook";
-import { type DataAccount, type LoginData, type LoginForm } from "../models/login.model";
+import {type DataAccount, type LoginForm } from "../models/login.model";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { api } from "../services/api.service";
 import { useModal } from "../hooks/useModal.hook";
 import { ConfirmModal } from "../components/modal.component";
-import { SaveSessionLogin } from "../services/session.service";
+import { SaveSessionLogin, SaveSessionToken } from "../services/session.service";
 import type { GeneralResponse } from "../models/response.model";
+import { useAuth } from "../hooks/useAuth.hook";
 
 
 export function LoginPage(): JSX.Element {
-    const { showAlert, AlertComponent } = useAlert();
+    const { showAlert, AlertComponent, hideAlert } = useAlert();
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [form, setForm] = useState<LoginForm>({ username: "", password: "" });
     const [messageResponse, setMessageResponse] = useState<string>("");
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const resultModal = useModal();
+    const {login} = useAuth();
+    const navigate = useNavigate();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
         setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -29,12 +32,15 @@ export function LoginPage(): JSX.Element {
     }
 
     const handleSubmit = async (e: React.BaseSyntheticEvent): Promise<void> => {
+        hideAlert();
         setIsLoading(true);
         e.preventDefault();
         
-        const { codeHttp, response, message } = await api.post<GeneralResponse, LoginForm>("/api/auth/login", form);
+        const { codeHttp, response, message } = await api.post<GeneralResponse<DataAccount>, LoginForm>("/api/auth/login", form);
         
-        if (codeHttp != 200) {
+        console.log(response);
+        
+        if (codeHttp != 200 || !response) {
             showAlert({
                 variant: "error",
                 title: "Terjadi Kesalahan Pada Server",
@@ -44,7 +50,10 @@ export function LoginPage(): JSX.Element {
             return;
         }
         setIsLoading(false);
-        SaveSessionLogin(response!.response);
+        SaveSessionLogin(response.response);
+        SaveSessionToken(response.response.token);
+        login(response.response);
+        navigate("/dashboard");
         setMessageResponse(message);
         resultModal.open();
 
@@ -72,7 +81,7 @@ export function LoginPage(): JSX.Element {
                             required
                             value={form.username}
                             onChange={handleChange}
-                            placeholder="you@example.com"
+                            placeholder="username"
                             className="bg-zinc-800 border border-zinc-700 rounded-sm px-4 py-3 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-blue-400 transition-colors"
                         />
                     </div>

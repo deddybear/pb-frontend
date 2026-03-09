@@ -1,12 +1,22 @@
 import { useState, type JSX } from "react";
-import { Link, useLocation } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import IconComponent from "./icon.component";
 import { navLinks } from "../models/menu.model";
-import { CheckLogin } from "../services/session.service";
+import { useAuth } from "../hooks/useAuth.hook";
+
 
 export default function NavbarComponent(): JSX.Element {
     const [open, setOpen] = useState<boolean>(false);
+    const { isLoggedIn, logout } = useAuth();
     const location = useLocation();
+    const navigate = useNavigate();
+
+    const handleLogout = (): void => {
+        logout();
+        setOpen(false);
+        navigate("/login");
+    };
+
 
     return (
         <header className="fixed top-0 left-0 right-0 z-50 bg-zinc-950 border-b border-zinc-800">
@@ -43,25 +53,33 @@ export default function NavbarComponent(): JSX.Element {
 
                     {/* CTA */}
                     <div className="hidden md:flex items-center gap-3">
-                        {CheckLogin() === true ?
+                        {/* if already login */}
+                        {isLoggedIn === true ?
                             (<>
                                 <Link
                                     to="/dashboard"
-                                    className="px-4 py-2 text-sm font-semibold uppercase tracking-widest transition-all duration-200 rounded-sm bg-blue-400 text-zinc-950 hover:bg-blue-300"
+                                    className="px-4 py-2 text-sm font-semibold uppercase tracking-widest transition-all duration-200 rounded-sm text-zinc-400 hover:text-white hover:bg-zinc-800"
                                 >
                                     Dashboard
                                 </Link>
-                                <Link
-                                    to="/logout"
-                                    className="px-4 py-2 text-sm font-semibold uppercase tracking-widest transition-all duration-200 rounded-sm bg-blue-400 text-zinc-950 hover:bg-blue-300"
+                                <button
+                                    onClick={handleLogout}
+                                    className="px-4 py-2 text-sm font-semibold uppercase tracking-widest transition-all duration-200 rounded-sm text-zinc-400 hover:text-white hover:bg-zinc-800"
                                 >
                                     Logout
-                                </Link>
+                                </button>
                             </>) :
+                            // if not yet login
                             (<>
                                 <Link
+                                    to="/register"
+                                    className={`px-4 py-2 text-sm font-semibold uppercase tracking-widest transition-all duration-200 rounded-sm ${location.pathname === "/register" ? "bg-blue-400 text-zinc-950" : "text-zinc-400 hover:text-white"}`}
+                                >
+                                    Register
+                                </Link>
+                                <Link
                                     to="/login"
-                                    className={`px-4 py-2 text-sm font-semibold uppercase tracking-widest transition-all duration-200 rounded-sm ${ location.pathname === "/login" ? "bg-blue-400 text-zinc-950" : "text-zinc-400 hover:text-white"}`}
+                                    className={`px-4 py-2 text-sm font-semibold uppercase tracking-widest transition-all duration-200 rounded-sm ${location.pathname === "/login" ? "bg-blue-400 text-zinc-950" : "text-zinc-400 hover:text-white"}`}
                                 >
                                     Login
                                 </Link>
@@ -118,7 +136,7 @@ export default function NavbarComponent(): JSX.Element {
                     </div>
                 </div>
             </div>
-        </header >
+        </header>
     );
 
 

@@ -15,7 +15,9 @@ export interface DataAccount {
     pcCafe: number;
     playerId: number;
     rank: number;
+    token: string;
     updateTime: string;
+    username: string;
 }
 
 export interface LoginData {
