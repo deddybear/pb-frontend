@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState,  type JSX } from "react";
 import { Outlet } from "react-router";
 import Sidebar from "../components/sidebar.component";
 
-export default function DashboardLayout() {
+export default function DashboardLayout() : JSX.Element {
     const [collapsed, setCollapsed] = useState<boolean>(false);
 
     return (

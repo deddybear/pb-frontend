@@ -1,4 +1,6 @@
-export default function IconComponent() {
+import { type JSX } from "react";
+
+export default function IconComponent() : JSX.Element {
     return (
         <>
             <svg

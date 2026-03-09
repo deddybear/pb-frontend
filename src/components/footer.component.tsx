@@ -1,4 +1,6 @@
 import { Link } from "react-router";
+import { type JSX } from "react";
+import IconComponent from "./icon.component";
 
 interface SocialLink {
   label: string;
@@ -12,16 +14,16 @@ const socials: SocialLink[] = [
   { label: "YT", href: "#" },
 ];
 
-export default function Footer() {
+export default function Footer() : JSX.Element {
   return (
     <footer className="bg-zinc-950 border-t border-zinc-800">
       <div className="max-w-7xl mx-auto px-4 py-10 flex flex-col items-center gap-6">
 
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 group">
-          <div className="w-8 h-8 bg-blue-400 rounded-sm rotate-12 group-hover:rotate-0 transition-transform duration-300" />
+          <IconComponent/>
           <span className="text-white font-black text-xl tracking-tight uppercase">
-            Point Blank <span className="text-blue-400">PS</span>
+            Point Blank <span className="text-blue-400">ITKI</span>
           </span>
         </Link>
 

@@ -1,20 +1,10 @@
-import { useState } from "react";
+import { useState, type JSX } from "react";
 import { Link, useLocation } from "react-router";
 import IconComponent from "./icon.component";
+import { navLinks } from "../models/menu.model";
+import { CheckLogin } from "../services/session.service";
 
-interface NavLink {
-    label: string;
-    to: string;
-}
-
-const navLinks: NavLink[] = [
-    { label: "Home", to: "/" },
-    { label: "Login", to: "/login" },
-    { label: "Register", to: "/register" },
-    { label: "Dashboard", to: "/dashboard" },
-];
-
-export default function NavbarComponent() {
+export default function NavbarComponent(): JSX.Element {
     const [open, setOpen] = useState<boolean>(false);
     const location = useLocation();
 
@@ -26,7 +16,7 @@ export default function NavbarComponent() {
                     <div className="w-8 h-8 rounded-sm rotate-12 group-hover:rotate-0 transition-transform duration-300">
                         <IconComponent />
                     </div>
-                    
+
                     <span className="text-white font-black text-xl tracking-tight uppercase">
                         <span className="text-blue-400">PB </span> ITKI
                     </span>
@@ -36,38 +26,50 @@ export default function NavbarComponent() {
                 <ul className="hidden md:flex items-center gap-1">
                     {navLinks.map((link) => {
                         const active = location.pathname === link.to;
+
                         return (
                             <li key={link.to}>
                                 <Link
                                     to={link.to}
                                     className={`px-4 py-2 text-sm font-semibold uppercase tracking-widest transition-all duration-200 rounded-sm
-                    ${active
-                                            ? "bg-blue-400 text-zinc-950"
-                                            : "text-zinc-400 hover:text-white hover:bg-zinc-800"
-                                        }`}
+                                                ${active ? "bg-blue-400 text-zinc-950" : "text-zinc-400 hover:text-white hover:bg-zinc-800"}`}
                                 >
                                     {link.label}
                                 </Link>
                             </li>
                         );
                     })}
+
+
+                    {/* CTA */}
+                    <div className="hidden md:flex items-center gap-3">
+                        {CheckLogin() === true ?
+                            (<>
+                                <Link
+                                    to="/dashboard"
+                                    className="px-4 py-2 text-sm font-semibold uppercase tracking-widest transition-all duration-200 rounded-sm bg-blue-400 text-zinc-950 hover:bg-blue-300"
+                                >
+                                    Dashboard
+                                </Link>
+                                <Link
+                                    to="/logout"
+                                    className="px-4 py-2 text-sm font-semibold uppercase tracking-widest transition-all duration-200 rounded-sm bg-blue-400 text-zinc-950 hover:bg-blue-300"
+                                >
+                                    Logout
+                                </Link>
+                            </>) :
+                            (<>
+                                <Link
+                                    to="/login"
+                                    className={`px-4 py-2 text-sm font-semibold uppercase tracking-widest transition-all duration-200 rounded-sm ${ location.pathname === "/login" ? "bg-blue-400 text-zinc-950" : "text-zinc-400 hover:text-white"}`}
+                                >
+                                    Login
+                                </Link>
+                            </>)
+                        }
+                    </div>
                 </ul>
 
-                {/* CTA */}
-                {/* <div className="hidden md:flex items-center gap-3">
-                    <Link
-                        to="/login"
-                        className="text-sm font-semibold text-zinc-400 hover:text-white transition-colors uppercase tracking-widest"
-                    >
-                        Login
-                    </Link>
-                    <Link
-                        to="/register"
-                        className="text-sm font-black uppercase tracking-widest px-5 py-2 bg-blue-400 text-zinc-950 hover:bg-blue-300 transition-colors rounded-sm"
-                    >
-                        Get Started
-                    </Link>
-                </div> */}
 
                 {/* Hamburger */}
                 <button
@@ -116,7 +118,7 @@ export default function NavbarComponent() {
                     </div>
                 </div>
             </div>
-        </header>
+        </header >
     );
 
 

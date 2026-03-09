@@ -1,6 +1,7 @@
 import { Link } from "react-router";
+import { type JSX } from "react";
 
-export default function HomePage() {
+export default function HomePage() : JSX.Element {
 
     return (
         <div className="min-h-screen bg-zinc-900 flex flex-col">
@@ -27,7 +28,7 @@ export default function HomePage() {
 
                         <h1 className="text-center text-white font-black text-5xl sm:text-6xl lg:text-8xl uppercase tracking-tighter leading-none mb-6">
                             Point Blank<br />
-                            <span className="text-blue-400">Private Server.</span>
+                            <span className="text-blue-400">ITKI.</span>
                         </h1>
 
                         <p className="text-center text-zinc-400 text-lg sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
@@ -40,13 +41,13 @@ export default function HomePage() {
                                 to="/register"
                                 className="w-full sm:w-auto px-8 py-4 bg-blue-400 text-zinc-950 font-black text-sm uppercase tracking-widest rounded-sm hover:bg-blue-300 transition-colors text-center"
                             >
-                                Get Started Free →
+                                Daftar Sekarang →
                             </Link>
                             <Link
                                 to="/dashboard"
                                 className="w-full sm:w-auto px-8 py-4 border border-zinc-700 text-zinc-400 font-black text-sm uppercase tracking-widest rounded-sm hover:border-zinc-500 hover:text-white transition-all text-center"
                             >
-                                View Dashboard
+                                Halaman Member
                             </Link>
                         </div>
 

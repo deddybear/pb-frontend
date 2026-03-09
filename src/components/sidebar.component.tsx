@@ -1,3 +1,4 @@
+import { type JSX } from "react";
 import { Link, useLocation } from "react-router";
 import IconComponent from "./icon.component";
 
@@ -43,7 +44,7 @@ const menuItems: MenuGroup[] = [
     },
 ];
 
-export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
+export default function Sidebar({ collapsed, onToggle }: SidebarProps) : JSX.Element {
     const location = useLocation();
 
     return (

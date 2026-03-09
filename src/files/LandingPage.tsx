@@ -84,13 +84,13 @@ export default function LandingPage(): JSX.Element {
                 to="/register"
                 className="w-full sm:w-auto px-8 py-4 bg-blue-400 text-zinc-950 font-black text-sm uppercase tracking-widest rounded-sm hover:bg-blue-300 transition-colors text-center"
               >
-                Get Started Free →
+                Daftar Sekarang →
               </Link>
               <Link
                 to="/dashboard"
                 className="w-full sm:w-auto px-8 py-4 border border-zinc-700 text-zinc-400 font-black text-sm uppercase tracking-widest rounded-sm hover:border-zinc-500 hover:text-white transition-all text-center"
               >
-                View Dashboard
+                Halaman Member
               </Link>
             </div>
 
@@ -179,7 +179,7 @@ export default function LandingPage(): JSX.Element {
                 to="/register"
                 className="relative shrink-0 px-8 py-4 bg-zinc-950 text-white font-black text-sm uppercase tracking-widest rounded-sm hover:bg-zinc-800 transition-colors"
               >
-                Get Started Free →
+                Daftar Sekarang →
               </Link>
             </div>
           </div>
