@@ -4,19 +4,19 @@ export interface LoginForm {
 }
 
 export interface DataAccount {
-    accessLevel: number;
+    access_level: number;
     age: number;
     cash: number;
-    createTime: string;
+    create_time: string;
     email: string;
     experience: number;
     gold: number;
     nickname: string;
-    pcCafe: number;
-    playerId: number;
+    pc_cafe: number;
+    player_id: number;
     rank: number;
     token: string;
-    updateTime: string;
+    update_time: string;
     username: string;
 }
 

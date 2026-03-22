@@ -18,18 +18,18 @@ export function SaveSessionLogin(dataLogin: DataAccount | null | undefined | unk
 export function GetSession(): DataAccount {
 
     return {
-        accessLevel: Number(localStorage.getItem("accessLevel")),
+        access_level: Number(localStorage.getItem("access_level")),
         age: Number(localStorage.getItem("age")),
         cash: Number(localStorage.getItem("cash")),
-        createTime: localStorage.getItem("createTime") ?? "",
+        create_time: localStorage.getItem("create_time") ?? "",
         email: localStorage.getItem("email") ?? "",
         experience: Number(localStorage.getItem("experience")),
         gold: Number(localStorage.getItem("gold")),
         nickname: localStorage.getItem("nickname") ?? "",
-        pcCafe: Number(localStorage.getItem("pcCafe")),
-        playerId: Number(localStorage.getItem("playerId")),
+        pc_cafe: Number(localStorage.getItem("pc_cafe")),
+        player_id: Number(localStorage.getItem("player_id")),
         rank: Number(localStorage.getItem("rank")),
-        updateTime: localStorage.getItem("updateTime") ?? "",
+        update_time: localStorage.getItem("update_time") ?? "",
         token: localStorage.getItem("ab6_log_stat") ?? "",
         username: localStorage.getItem("username") ?? ""
     };
@@ -38,9 +38,9 @@ export function GetSession(): DataAccount {
 
 export function ClearSession(): void {
     const keys: string[] = [
-        "accessLevel", "age", "cash", "createTime", "email",
-        "experience", "gold", "nickname", "pcCafe", "playerId",
-        "rank", "ab6_log_stat", "updateTime", "username",
+        "access_level", "age", "cash", "create_time", "email",
+        "experience", "gold", "nickname", "pc_cafe", "player_id",
+        "rank", "ab6_log_stat", "update_time", "username",
     ];
 
     keys.forEach((key) => localStorage.removeItem(key));

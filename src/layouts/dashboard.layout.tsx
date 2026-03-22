@@ -1,21 +1,66 @@
 import { useState, type JSX } from "react";
-import { Outlet } from "react-router";
+import { Outlet, useNavigate } from "react-router";
 import Sidebar from "../components/sidebar.component";
 import { useAuth } from "../hooks/useAuth.hook";
 import { type DashboardOutletContext } from "../models/dashboard.model";
-
+import { type MenuSidebarList } from "../models/menu.model";
+import { faDoorOpen, faEnvelopeOpen, faGun, faHouse, faKey, faMedal, faMoneyBill1Wave } from "@fortawesome/free-solid-svg-icons";
+import BreadcrumbComponent from "../components/breadcump.component";
 export type { DashboardOutletContext }
 
 export default function DashboardLayout(): JSX.Element {
     const [pageTitle, setPageTitle] = useState<string>("");
+    const [descFeature, setDescFeature] = useState<string>("");
     const [collapsed, setCollapsed] = useState<boolean>(false);
+    const navigate = useNavigate();
+    const { logout, dataAccount } = useAuth();
 
-    const auth = useAuth();
+    if (dataAccount === null) {
+        navigate("/login");
+    }
+
+    const handleLogout = (): void => {
+        logout();
+        navigate("/login");
+    };
+
+    const menuSidebarList: MenuSidebarList[] = [
+        {
+            group: "Shop",
+            items: [
+                { label: "Cash", to: "/dashboard/shop-cash", icon: faMoneyBill1Wave },
+                { label: "Weapon", to: "/dashboard/shop-weapon", icon: faGun },
+                { label: "Medal", to: "/dashboard/shop-medal", icon: faMedal }
+            ],
+        },
+        {
+            group: "Account",
+            items: [
+                { label: "Change Email", to: "/dashboard/change-email", icon: faEnvelopeOpen },
+                { label: "Change Password", to: "/dashboard/change-password", icon: faKey },
+                { label: "Logout", to: (() => { }), icon: faDoorOpen }
+            ],
+        },
+        {
+            group: "Home",
+            items: [
+                { label: "Back To Home", to: "/", icon: faHouse }
+            ],
+        }
+    ];
+
 
     return (
         <div className="min-h-screen bg-zinc-900 flex">
             {/* Sidebar */}
-            <Sidebar collapsed={collapsed} onToggle={() => setCollapsed((prev) => !prev)} />
+            <Sidebar
+                handleLogout={handleLogout}
+                username={dataAccount!.username.toUpperCase()}
+                email={dataAccount!.email}
+                menuSidebarList={menuSidebarList}
+                collapsed={collapsed}
+                onToggle={() => setCollapsed((prev) => !prev)}
+            />
 
             {/* Main area */}
             <div
@@ -45,14 +90,6 @@ export default function DashboardLayout(): JSX.Element {
 
                     {/* Actions */}
                     <div className="flex items-center gap-3 ml-auto">
-                        {/* Notification */}
-                        {/* <button
-                            className="relative w-9 h-9 flex items-center justify-center rounded-sm bg-zinc-800 text-zinc-400 hover:text-white transition-colors"
-                            aria-label="Notifications"
-                        >
-                            <span className="text-sm">◎</span>
-                            <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-blue-400 rounded-full" />
-                        </button> */}
 
                         {/* Search */}
                         <div className="hidden sm:flex items-center gap-2 bg-zinc-800 rounded-sm px-3 py-2 text-zinc-500 text-sm w-48 hover:bg-zinc-700 transition-colors cursor-pointer">
@@ -63,13 +100,31 @@ export default function DashboardLayout(): JSX.Element {
 
                         {/* Avatar */}
                         <div className="w-9 h-9 rounded-sm bg-blue-400 flex items-center justify-center text-zinc-950 font-black text-sm cursor-pointer hover:bg-blue-300 transition-colors">
-                            {auth.dataAccount?.username[0].toUpperCase()}
+                            {dataAccount!.username[0].toUpperCase()}
                         </div>
                     </div>
                 </header>
 
                 <main className="flex-1 p-4 sm:p-6 lg:p-8">
-                    <Outlet context={{ setPageTitle }} />
+                    {/* Breadcrumb */}
+                    <div className="my-1">
+                        <BreadcrumbComponent />
+                    </div>
+
+                    {/* Page heading */}
+                    <div className="mb-8 flex items-start justify-between gap-4 flex-wrap">
+                        <div>
+                            <h1 className="text-white font-black text-3xl sm:text-4xl uppercase tracking-tight">
+                                {pageTitle}
+                            </h1>
+                            <p className="text-zinc-500 mt-1 text-sm">
+                                {descFeature}
+                                {/* Welcome back, {dataAccount!.username}. Here's what's happening. */}
+                            </p>
+                        </div>
+                    </div>
+
+                    <Outlet context={{ setPageTitle, dataAccount, setDescFeature }} />
                 </main>
             </div>
         </div>

@@ -1,15 +1,12 @@
 import { type JSX } from "react";
 import { Link, useLocation } from "react-router";
 import IconComponent from "./icon.component";
-import { menuDashboard, type SidebarProps } from "../models/menu.model";
-import { useAuth } from "../hooks/useAuth.hook";
+import { type SidebarProps } from "../models/menu.model";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
-
-
-export default function Sidebar({ collapsed, onToggle }: SidebarProps): JSX.Element {
+export default function Sidebar({ username, email, collapsed, onToggle, menuSidebarList, handleLogout }: SidebarProps): JSX.Element {
     const location = useLocation();
-    const auth = useAuth();
 
     return (
         <>
@@ -39,7 +36,7 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps): JSX.Elem
 
                 {/* Nav */}
                 <nav className="flex-1 overflow-y-auto py-4 px-2">
-                    {menuDashboard.map((group) => (
+                    {menuSidebarList.length === 0 ? (<div></div>) : (menuSidebarList.map((group) => (
                         <div key={group.group} className="mb-6">
                             {!collapsed && (
                                 <p className="text-xs font-black uppercase tracking-widest text-zinc-600 px-3 mb-2">
@@ -47,10 +44,10 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps): JSX.Elem
                                 </p>
                             )}
                             <ul className="flex flex-col gap-0.5">
-                                {group.items.map((item) => {
+                                {group.items.map((item, index) => {
                                     const active = location.pathname === item.to;
                                     return (
-                                        <li key={item.to}>
+                                        typeof item.to === "string" ? (<li key={item.to}>
                                             <Link
                                                 to={item.to}
                                                 title={collapsed ? item.label : undefined}
@@ -61,7 +58,7 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps): JSX.Elem
                                                     }`}
                                             >
                                                 <span className={`text-base shrink-0 ${active ? "text-zinc-950" : "text-blue-400"}`}>
-                                                    {item.icon}
+                                                    <FontAwesomeIcon icon={item.icon} />
                                                 </span>
                                                 {!collapsed && (
                                                     <span className="uppercase tracking-widest text-xs whitespace-nowrap overflow-hidden">
@@ -69,24 +66,43 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps): JSX.Elem
                                                     </span>
                                                 )}
                                             </Link>
-                                        </li>
+                                        </li>) : (<li key={index}>
+                                            <button
+                                                onClick={handleLogout}
+                                                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-sm text-sm font-semibold transition-all duration-150 group
+                                                    ${active
+                                                        ? "bg-blue-400 text-zinc-950"
+                                                        : "text-zinc-400 hover:bg-zinc-800 hover:text-white"
+                                                    }`}
+                                            >
+                                                {collapsed ? item.label : undefined}
+                                                <span className={`text-base shrink-0 ${active ? "text-zinc-950" : "text-blue-400"}`}>
+                                                     <FontAwesomeIcon icon={item.icon} />
+                                                </span>
+                                                {!collapsed && (
+                                                    <span className="uppercase tracking-widest text-xs whitespace-nowrap overflow-hidden">
+                                                        {item.label}
+                                                    </span>
+                                                )}
+                                            </button>
+                                        </li>)
                                     );
                                 })}
                             </ul>
                         </div>
-                    ))}
+                    )))}
                 </nav>
 
                 {/* User */}
                 <div className="border-t border-zinc-800 p-3 shrink-0">
                     <div className="flex items-center gap-3 px-2 py-2 rounded-sm hover:bg-zinc-800 cursor-pointer transition-colors">
                         <div className="w-8 h-8 rounded-sm bg-blue-400 flex items-center justify-center text-zinc-950 font-black text-sm shrink-0">
-                            {auth.dataAccount?.username[0].toUpperCase()}
+                            {username[0].toUpperCase()}
                         </div>
                         {!collapsed && (
                             <div className="overflow-hidden">
-                                <p className="text-white font-bold text-sm truncate">{auth.dataAccount?.username || "NULL"}</p>
-                                <p className="text-zinc-500 text-xs truncate">{auth.dataAccount?.email || "NULL_EMAIL"}</p>
+                                <p className="text-white font-bold text-sm truncate">{username.toUpperCase() || "NULL"}</p>
+                                <p className="text-zinc-500 text-xs truncate">{email || "NULL_EMAIL"}</p>
                             </div>
                         )}
                     </div>

@@ -14,11 +14,15 @@ import GuestRoute from "../middlewares/guest.middleware";
 import ShopCashPage from "../pages/dashboard/shop-cash.page";
 import ShopMedalPage from "../pages/dashboard/shop-medal.page";
 import ShopWeaponPage from "../pages/dashboard/shop-weapon.page";
+import ChangeEmailPage from "../pages/dashboard/change-email.page";
+import ChangePasswordPage from "../pages/dashboard/change-password.page";
+import ErrorBoundary, { ErrorFallbackPage } from "../pages/error.page";
 
 export const router = createBrowserRouter([
     {
         path: "/",
         Component: App,
+        errorElement: <ErrorFallbackPage />,
         children: [
             { index: true, Component: HomePage },
             {
@@ -39,14 +43,18 @@ export const router = createBrowserRouter([
     },
     {
         path: "/dashboard",
-        element: (<AuthRouteProtected>
-            <DashboardLayout />
-        </AuthRouteProtected>),
+        element: (<ErrorBoundary>
+            <AuthRouteProtected>
+                <DashboardLayout />
+            </AuthRouteProtected>
+        </ErrorBoundary>),
         children: [
             { index: true, Component: DashboardPages },
             { path: "/dashboard/shop-cash", Component: ShopCashPage },
             { path: "/dashboard/shop-medal", Component: ShopMedalPage },
-            { path: "/dashboard/shop-weapon", Component: ShopWeaponPage }
+            { path: "/dashboard/shop-weapon", Component: ShopWeaponPage },
+            { path: "/dashboard/change-email", Component: ChangeEmailPage },
+            { path: "/dashboard/change-password", Component: ChangePasswordPage }
         ]
 
     },

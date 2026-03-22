@@ -1,3 +1,5 @@
+import type { IconProp } from "@fortawesome/fontawesome-svg-core";
+
 export interface NavLink {
     label: string;
     to: string;
@@ -5,51 +7,23 @@ export interface NavLink {
 
 export interface MenuItem {
     label: string;
-    to: string;
-    icon: string;
+    to: string | (() => void);
+    icon: IconProp;
 }
 
-export interface MenuGroup {
+export interface MenuSidebarList {
     group: string;
     items: MenuItem[];
 }
 
 export interface SidebarProps {
+    username: string,
+    email: string,
     collapsed: boolean;
     onToggle: () => void;
+    menuSidebarList: MenuSidebarList[],
+    handleLogout: () => void;
 }
 
 
-export const navLinks: NavLink[] = [
-    { label: "Home", to: "/" },
-    // { label: "Register", to: "/register" },
-    { label: "Patch Notes", to: "/patch-notes"},
-    { label: "Download", to: "/download" },
-];
 
-export const menuDashboard: MenuGroup[] = [
-    {
-        group: "Shop",
-        items: [
-            { label: "Cash", to: "/dashboard/shop-cash", icon: "▣" },
-            { label: "Weapon", to: "/dashboard/shop-weapon", icon: "▣" },
-            { label: "Medal", to: "/dashboard/shop-medal", icon: "▣" },
-            { label: "Home", to: "/", icon: "▣" }
-        ],
-    },
-    // {
-    //     group: "Profile",
-    //     items: [
-    //         { label: "Users", to: "/dashboard/users", icon: "◎" },
-    //         { label: "Settings", to: "/dashboard/settings", icon: "◐" },
-    //         { label: "Billing", to: "/dashboard/billing", icon: "◆" },
-    //     ],
-    // },
-    // {
-    //     group: "Support",
-    //     items: [
-    //         { label: "Docs", to: "/dashboard/docs", icon: "◇" },
-    //         { label: "Help", to: "/dashboard/help", icon: "◯" },
-    //     ],
-    // },
-];
