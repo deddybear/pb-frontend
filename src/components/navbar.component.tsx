@@ -1,8 +1,9 @@
 import { useState, type JSX } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import IconComponent from "./icon.component";
-import { navLinks } from "../models/menu.model";
+
 import { useAuth } from "../hooks/useAuth.hook";
+import type { NavLink } from "../models/menu.model";
 
 
 export default function NavbarComponent(): JSX.Element {
@@ -16,6 +17,15 @@ export default function NavbarComponent(): JSX.Element {
         setOpen(false);
         navigate("/login");
     };
+
+    const navLinks: NavLink[] = [
+        { label: "Home", to: "/" },
+
+        // { label: "Register", to: "/register" },
+        { label: "Patch Notes", to: "/patch-notes" },
+        { label: "Download", to: "/download" },
+    ];
+
 
 
     return (

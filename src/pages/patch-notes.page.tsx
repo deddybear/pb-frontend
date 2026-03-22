@@ -1,7 +1,55 @@
 import { type JSX } from "react";
-import { patchNotes, patchTypeConfig } from "../models/download.model";
+import { type PatchNote } from "../models/download.model";
 
 export default function PatchNotesPage(): JSX.Element {
+
+
+    const patchNotes: PatchNote[] = [
+        {
+            version: "v3.6.8",
+            date: "01 Januari 2026",
+            type: "major",
+            changes: [
+                "Armor GM dihilangkan !",
+                // "Map baru ditambahkan: Arctic Zone & Desert Storm",
+                // "Sistem rank season 12 direset",
+                // "Senjata baru: AK-12 & M416 tersedia di in-game shop",
+                // "Anti-cheat engine diperbarui ke versi terbaru",
+                // "Optimasi performa server — ping rata-rata turun 20ms",
+                // "Perbaikan bug karakter stuck di spawn area",
+                "UI inventory diperbaharui",
+                "Fix Bug Error pada shop weapon"
+                // "Hotfix: crash saat masuk room ranked",
+                // "Perbaikan visual glitch pada scope sniper",
+            ],
+        },
+        // {
+        //   version: "v2.3.8",
+        //   date: "18 Feb 2026",
+        //   type: "minor",
+        //   changes: [
+        //     "Optimasi performa server — ping rata-rata turun 20ms",
+        //     "Perbaikan bug karakter stuck di spawn area",
+        //     "UI inventory diperbaharui",
+        //   ],
+        // },
+        // {
+        //   version: "v2.3.5",
+        //   date: "02 Jan 2026",
+        //   type: "fix",
+        //   changes: [
+        //     "Hotfix: crash saat masuk room ranked",
+        //     "Perbaikan visual glitch pada scope sniper",
+        //   ],
+        // },
+    ];
+
+    const patchTypeConfig: Record<PatchNote["type"], { label: string; color: string }> = {
+        major: { label: "MAJOR", color: "text-blue-400 border-blue-400/30 bg-blue-400/10" },
+        minor: { label: "MINOR", color: "text-blue-400 border-blue-400/30 bg-blue-400/10" },
+        fix: { label: "HOTFIX", color: "text-red-400 border-red-400/30 bg-red-400/10" },
+    };
+
     return (
         <div className="min-h-screen bg-zinc-900 flex flex-col">
             <main className="flex-1 pt-16">

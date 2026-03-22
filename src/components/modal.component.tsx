@@ -145,7 +145,8 @@ export function ConfirmModal({
           {cancelLabel}
         </button>
         {
-          (onlyCloseButton == true) ? <></> : <button
+          (onlyCloseButton == true) ? <></> : 
+          <button
             onClick={() => { onConfirm(); onClose(); }}
             className={`flex-1 py-2.5 font-black text-xs uppercase tracking-widest rounded-sm transition-all ${confirmStyles[variant]}`}
           >

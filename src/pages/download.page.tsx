@@ -1,9 +1,28 @@
 import { type JSX } from "react";
-import { installSteps, specs } from "../models/download.model";
+import { type InstallStep, type Spec } from "../models/download.model";
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export default function DownloadPage(): JSX.Element {
+
+  const specs: Spec[] = [
+    { label: "OS", minimum: "Windows 7 (64-bit)", recommended: "Windows 10/11 (64-bit)" },
+    { label: "Processor", minimum: "Intel Core i3 2.4 GHz", recommended: "Intel Core i5 3.0 GHz+" },
+    { label: "RAM", minimum: "4 GB", recommended: "8 GB" },
+    { label: "GPU", minimum: "NVIDIA GTX 650", recommended: "NVIDIA GTX 1060 / AMD RX 580" },
+    { label: "Storage", minimum: "8 GB", recommended: "16 GB SSD" },
+    { label: "Network", minimum: "2 Mbps", recommended: "10 Mbps+" },
+  ];
+
+  const installSteps: InstallStep[] = [
+    { num: "01", title: "Download Client", desc: "Klik tombol download di atas dan tunggu hingga file installer selesai diunduh." },
+    { num: "02", title: "Ekstrak File", desc: "Ekstrak file .zip menggunakan WinRAR atau 7-Zip ke folder yang kamu inginkan." },
+    { num: "03", title: "Baca Manual", desc: "Baca File Manual *BACA_AKU* yang ada pada file .Zip ." },
+    { num: "04", title: "Login & Main", desc: "Buka launcher, login dengan akun yang sudah didaftarkan, dan langsung bermain!" },
+  ];
+
+
+
   return (
     <div className="min-h-screen bg-zinc-900 flex flex-col">
 
@@ -140,7 +159,8 @@ export default function DownloadPage(): JSX.Element {
 
             {/* Download button */}
             <a
-              href="#"
+              href="ftp://ftp@10.1.28.24/PB_ITKI_CLIENT_FIX_LAUNCHER.rar" target="_blank"
+              rel="noopener noreferrer"
               className="group relative inline-flex items-center gap-3 px-10 py-4 bg-blue-400 text-zinc-950 font-black text-sm uppercase tracking-widest rounded-sm hover:bg-blue-300 transition-all duration-200 shadow-lg shadow-blue-400/20 hover:shadow-blue-400/40"
             >
               {/* Arrow icon */}

@@ -1,8 +1,8 @@
 import { useState, type JSX } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link } from "react-router";
 import AuthLayout from "../layouts/auth.layout";
 import { useAlert } from "../hooks/useAlert.hook";
-import {type DataAccount, type LoginForm } from "../models/login.model";
+import { type DataAccount, type LoginForm } from "../models/login.model";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { api } from "../services/api.service";
@@ -18,10 +18,10 @@ export function LoginPage(): JSX.Element {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [form, setForm] = useState<LoginForm>({ username: "", password: "" });
     const [messageResponse, setMessageResponse] = useState<string>("");
+    const [dataResponse, setDataResponse] = useState<GeneralResponse<DataAccount>>();
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const resultModal = useModal();
-    const {login} = useAuth();
-    const navigate = useNavigate();
+    const { login } = useAuth();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
         setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -35,11 +35,14 @@ export function LoginPage(): JSX.Element {
         hideAlert();
         setIsLoading(true);
         e.preventDefault();
-        
+
+        await doLogin();
+
+    };
+
+    const doLogin = async () => {
         const { codeHttp, response, message } = await api.post<GeneralResponse<DataAccount>, LoginForm>("/api/auth/login", form);
-        
-        console.log(response);
-        
+
         if (codeHttp != 200 || !response) {
             showAlert({
                 variant: "error",
@@ -50,22 +53,23 @@ export function LoginPage(): JSX.Element {
             return;
         }
         setIsLoading(false);
-        SaveSessionLogin(response.response);
-        SaveSessionToken(response.response.token);
-        login(response.response);
-        navigate("/dashboard");
         setMessageResponse(message);
+        setDataResponse(response);
         resultModal.open();
+    }
 
-
-
-
-    };
+    const saveState = () => {
+        console.log(dataResponse);
+        
+        SaveSessionLogin(dataResponse!.response);
+        SaveSessionToken(dataResponse!.response.token);
+        login(dataResponse!.response);
+    }
 
     return (
         <AuthLayout
-            heading="Welcome back."
-            sub="Log in to your account to continue."
+            heading="Selamat Datang."
+            sub="Masuk ke akun Anda untuk melanjutkan."
             flip={true}>
             <div>
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5">
@@ -138,14 +142,14 @@ export function LoginPage(): JSX.Element {
                 </form>
                 <ConfirmModal
                     isOpen={resultModal.isOpen}
-                    onClose={resultModal.close}
-                    title="Status Pendaftaran"
+                    onClose={() => saveState()}
+                    title="Status Login"
                     message={`${messageResponse}`}
                     variant="success"
                     confirmLabel="Baik"
                     cancelLabel="Tutup"
                     onlyCloseButton={true}
-                    onConfirm={() => { }}
+                    onConfirm={() => {}}
                 />
             </div>
         </AuthLayout>

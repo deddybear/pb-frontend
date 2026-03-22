@@ -5,7 +5,6 @@ export default function HomePage() : JSX.Element {
 
     return (
         <div className="min-h-screen bg-zinc-900 flex flex-col">
-
             <main className="flex-1 pt-16">
                 <section className="relative overflow-hidden bg-zinc-950 border-b border-zinc-800">
                     <div

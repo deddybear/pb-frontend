@@ -36,7 +36,7 @@ export default function RegisterPage(): JSX.Element {
         confirmModal.open();
     };
 
-    const register = async (form: RegisterForm): Promise<void> => {
+    const doRegister = async (form: RegisterForm): Promise<void> => {
         setIsLoading(true);
         const { codeHttp, message } = await api.post("/api/auth/signup", form);
 
@@ -62,8 +62,8 @@ export default function RegisterPage(): JSX.Element {
 
     return (
         <AuthLayout
-            heading="Create account."
-            sub="Start building something bold today."
+            heading="Daftar Akun Baru."
+            sub="Silahkan mengisi form pendaftaran dibawah ini."
             flip={true}
         >
             <form onSubmit={handleSubmit} className="flex flex-col gap-5">
@@ -128,7 +128,7 @@ export default function RegisterPage(): JSX.Element {
                         placeholder="you@example.com"
                         className="bg-zinc-800 border border-zinc-700 rounded-sm px-4 py-3 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-blue-400 transition-colors"
                     />
-                    <span role="alert" className="text-xs font-black uppercase text-zinc-950 bg-amber-500/40">dimohon untuk menggunakan email yang aktif !</span>
+                    <span role="alert" className="text-xs font-black uppercase text-gray-50 bg-amber-300/40">dimohon untuk menggunakan email yang aktif !</span>
                 </div>
 
                 {/* Age */}
@@ -150,10 +150,11 @@ export default function RegisterPage(): JSX.Element {
                 </div>
 
                 <p className="text-zinc-600 text-xs">
-                    By signing up you agree to our{" "}
-                    <Link to="#" className="text-blue-400 hover:text-blue-300">Terms</Link>{" "}
-                    and{" "}
-                    <Link to="#" className="text-blue-400 hover:text-blue-300">Privacy Policy</Link>.
+                    Dengan mendaftar, Anda menyetujui {" "}
+                    <Link to="#" className="text-blue-400 hover:text-blue-300">Syarat</Link>{" "}
+                    dan{" "}
+                    <Link to="#" className="text-blue-400 hover:text-blue-300">Kebijakan Privasi</Link>
+                    {" "}kami.
                 </p>
 
                 <button
@@ -180,7 +181,7 @@ export default function RegisterPage(): JSX.Element {
                 confirmLabel="Ya, Gunakan itu"
                 cancelLabel="Batal"
                 onlyCloseButton={false}
-                onConfirm={() => register(form)}
+                onConfirm={() => doRegister(form)}
             />
             <ConfirmModal
                 isOpen={resultModal.isOpen}
