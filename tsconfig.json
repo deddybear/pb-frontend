@@ -1,4 +1,5 @@
 {
+  "exclude": ["src/files"],
   "files": [],
   "references": [
     { "path": "./tsconfig.app.json" },

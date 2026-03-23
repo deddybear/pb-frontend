@@ -17,6 +17,7 @@ import ShopWeaponPage from "../pages/dashboard/shop-weapon.page";
 import ChangeEmailPage from "../pages/dashboard/change-email.page";
 import ChangePasswordPage from "../pages/dashboard/change-password.page";
 import ErrorBoundary, { ErrorFallbackPage } from "../pages/error.page";
+import InventoryPage from "../pages/dashboard/inventory.page";
 
 export const router = createBrowserRouter([
     {
@@ -54,7 +55,8 @@ export const router = createBrowserRouter([
             { path: "/dashboard/shop-medal", Component: ShopMedalPage },
             { path: "/dashboard/shop-weapon", Component: ShopWeaponPage },
             { path: "/dashboard/change-email", Component: ChangeEmailPage },
-            { path: "/dashboard/change-password", Component: ChangePasswordPage }
+            { path: "/dashboard/change-password", Component: ChangePasswordPage },
+            { path: "/dashboard/inventory", Component: InventoryPage }
         ]
 
     },

@@ -55,7 +55,6 @@ export default function ChangePasswordPage(): JSX.Element {
     }
 
     const handleCloseModal = (): void => {
-        setIsLoading(false);
         confirmModal.close();
     }
 
@@ -66,8 +65,17 @@ export default function ChangePasswordPage(): JSX.Element {
     const handleSubmit = (e: React.BaseSyntheticEvent): void => {
         e.preventDefault();
 
-        setIsLoading(true);
         hideAlert();
+
+        if (/\s/gm.test(form.newPassword)) {
+            showAlert({
+                variant: "error",
+                title: "Ada Kesalahan",
+                message: "Password Baru tidak boleh mengandung spasi"
+            });
+
+            return;
+        }
 
         if (strengthPassword === "Lemah") {
             showAlert({
@@ -76,7 +84,7 @@ export default function ChangePasswordPage(): JSX.Element {
                 message: "Password terlalu Lemah."
             });
 
-            setIsLoading(false);
+
             return;
         }
 
@@ -87,7 +95,7 @@ export default function ChangePasswordPage(): JSX.Element {
                 message: "Password baru tidak boleh sama."
             });
 
-            setIsLoading(false);
+
             return;
         }
 
@@ -98,7 +106,7 @@ export default function ChangePasswordPage(): JSX.Element {
                 message: "Password baru tidak cocok."
             });
 
-            setIsLoading(false);
+
             return;
         }
 
@@ -109,7 +117,7 @@ export default function ChangePasswordPage(): JSX.Element {
                 message: "Password baru minimal 5 karakter."
             });
 
-            setIsLoading(false);
+
             return;
         }
 
@@ -117,7 +125,7 @@ export default function ChangePasswordPage(): JSX.Element {
     };
 
     const doChangePassword = async (form: ChangePasswordForm): Promise<void> => {
-
+        setIsLoading(true);
         const payload: ChangePasswordBody = {
             player_id: Number(dataAccount.player_id),
             old_password: form.currentPassword,
@@ -137,6 +145,7 @@ export default function ChangePasswordPage(): JSX.Element {
         }
 
         setMessageResponse(message);
+        resultModal.open();
         setIsLoading(false);
 
         setForm({ newPassword: "", currentPassword: "", confirmPassword: "" });

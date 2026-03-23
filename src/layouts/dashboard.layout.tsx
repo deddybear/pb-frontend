@@ -3,7 +3,7 @@ import { Outlet, useNavigate } from "react-router";
 import Sidebar from "../components/sidebar.component";
 import { useAuth } from "../hooks/useAuth.hook";
 import { type MenuSidebarList } from "../models/menu.model";
-import { faDoorOpen, faEnvelopeOpen, faGun, faHouse, faKey, faMedal, faMoneyBill1Wave } from "@fortawesome/free-solid-svg-icons";
+import { faBagShopping, faDoorOpen, faEnvelopeOpen, faGun, faHouse, faKey, faMedal, faMoneyBill1Wave } from "@fortawesome/free-solid-svg-icons";
 import BreadcrumbComponent from "../components/breadcump.component";
 
 export default function DashboardLayout(): JSX.Element {
@@ -34,6 +34,7 @@ export default function DashboardLayout(): JSX.Element {
         {
             group: "Account",
             items: [
+                { label: "Inventory", to: "/dashboard/inventory", icon: faBagShopping },
                 { label: "Change Email", to: "/dashboard/change-email", icon: faEnvelopeOpen },
                 { label: "Change Password", to: "/dashboard/change-password", icon: faKey },
                 { label: "Logout", to: (() => { }), icon: faDoorOpen }

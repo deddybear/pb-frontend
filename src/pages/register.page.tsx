@@ -38,6 +38,27 @@ export default function RegisterPage(): JSX.Element {
 
     const doRegister = async (form: RegisterForm): Promise<void> => {
         setIsLoading(true);
+
+        if (/\s/gm.test(form.username)) {
+            showAlert({
+                variant: "error",
+                title: "Terjadi Kesalahan Pada Inputan",
+                message: "Username tidak boleh mengandung spasi"
+            });
+            setIsLoading(false);
+            return;
+        }
+
+        if (/\s/gm.test(form.password)) {
+            showAlert({
+                variant: "error",
+                title: "Terjadi Kesalahan Pada Inputan",
+                message: "Password tidak boleh mengandung spasi"
+            });
+            setIsLoading(false);
+            return;
+        }
+
         const { codeHttp, message } = await api.post("/api/auth/signup", form);
 
         if (codeHttp == 201) {
@@ -79,7 +100,7 @@ export default function RegisterPage(): JSX.Element {
                         required
                         value={form.username}
                         onChange={handleChange}
-                        placeholder="John Doe"
+                        placeholder="JohnDoe"
                         className="bg-zinc-800 border border-zinc-700 rounded-sm px-4 py-3 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-blue-400 transition-colors"
                     />
                 </div>

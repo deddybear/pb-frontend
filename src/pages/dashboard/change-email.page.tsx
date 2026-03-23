@@ -38,7 +38,6 @@ export default function ChangeEmailPage(): JSX.Element {
     };
 
     const handleCloseModal = (): void => {
-        setIsLoading(false);
         confirmModal.close();
     }
 
@@ -108,9 +107,10 @@ export default function ChangeEmailPage(): JSX.Element {
         const fetchEmail = await fetchDataPlayer(Number(dataAccount.player_id));
         const newEmail = fetchEmail ?? form.newEmail;
 
-        setIsLoading(false);
         setMessageResponse(message);
         resultModal.open();
+        setIsLoading(false);
+        
         setForm({ currentEmail: newEmail, newEmail: "" })
     }
 
