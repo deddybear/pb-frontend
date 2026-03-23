@@ -2,11 +2,9 @@ import { useState, type JSX } from "react";
 import { Outlet, useNavigate } from "react-router";
 import Sidebar from "../components/sidebar.component";
 import { useAuth } from "../hooks/useAuth.hook";
-import { type DashboardOutletContext } from "../models/dashboard.model";
 import { type MenuSidebarList } from "../models/menu.model";
 import { faDoorOpen, faEnvelopeOpen, faGun, faHouse, faKey, faMedal, faMoneyBill1Wave } from "@fortawesome/free-solid-svg-icons";
 import BreadcrumbComponent from "../components/breadcump.component";
-export type { DashboardOutletContext }
 
 export default function DashboardLayout(): JSX.Element {
     const [pageTitle, setPageTitle] = useState<string>("");

@@ -7,6 +7,8 @@ import { useModal } from "../../hooks/useModal.hook";
 import { ConfirmModal } from "../../components/modal.component";
 import { api } from "../../services/api.service";
 import type { GeneralResponse } from "../../models/response.model";
+import type { DataAccount } from "../../models/login.model";
+import { useAuth } from "../../hooks/useAuth.hook";
 
 export default function ChangeEmailPage(): JSX.Element {
     const { setPageTitle, dataAccount, setDescFeature } = useOutletContext<DashboardOutletContext>();
@@ -20,6 +22,7 @@ export default function ChangeEmailPage(): JSX.Element {
     const navigate = useNavigate();
     const confirmModal = useModal();
     const resultModal = useModal();
+    const { login } = useAuth();
 
     if (dataAccount == null) {
         navigate("/");
@@ -43,7 +46,7 @@ export default function ChangeEmailPage(): JSX.Element {
     const handleSubmit = (e: React.BaseSyntheticEvent): void => {
         e.preventDefault();
 
-        setIsLoading(true);
+
         hideAlert();
 
         if (form.newEmail === form.currentEmail) {
@@ -60,7 +63,30 @@ export default function ChangeEmailPage(): JSX.Element {
         confirmModal.open();
     };
 
+    const fetchDataPlayer = async (playerId: number): Promise<string> => {
+
+        const { codeHttp, response, message } = await api.get<GeneralResponse<DataAccount>>("/api/account/get-data", {
+            params: { player_id: playerId }
+        });
+
+        if (codeHttp != 200 || !response) {
+            showAlert({
+                variant: "error",
+                title: "Ada Kesalahan",
+                message: message
+            });
+            return "";
+        }
+
+        login(response.response);
+
+        return response.response.email;
+    }
+
     const doChangeEmail = async (form: ChangeEmailForm): Promise<void> => {
+
+        setIsLoading(true);
+
         const payload: ChangeEmailBody = {
             player_id: Number(dataAccount.player_id),
             new_email: form.newEmail,
@@ -79,9 +105,13 @@ export default function ChangeEmailPage(): JSX.Element {
             return;
         }
 
-        setMessageResponse(message);
+        const fetchEmail = await fetchDataPlayer(Number(dataAccount.player_id));
+        const newEmail = fetchEmail ?? form.newEmail;
+
         setIsLoading(false);
-        setForm({ currentEmail: form.newEmail, newEmail: "" })
+        setMessageResponse(message);
+        resultModal.open();
+        setForm({ currentEmail: newEmail, newEmail: "" })
     }
 
 

@@ -40,7 +40,7 @@ export function ClearSession(): void {
     const keys: string[] = [
         "access_level", "age", "cash", "create_time", "email",
         "experience", "gold", "nickname", "pc_cafe", "player_id",
-        "rank", "ab6_log_stat", "update_time", "username",
+        "rank", "ab6_log_stat", "update_time", "username", "token",
     ];
 
     keys.forEach((key) => localStorage.removeItem(key));

@@ -2,11 +2,13 @@
 
 type ContentType = "json" | "form-data";
 type HttpMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
+type QueryParams = Record<string, string | number | boolean | null | undefined>;
 
 interface RequestOptions<TBody = unknown> {
   headers?: Record<string, string>;
   body?: TBody;
   contentType?: ContentType;
+  params?: QueryParams;
 }
 
 interface ApiResponse<TData = unknown> {
@@ -19,8 +21,18 @@ interface ApiResponse<TData = unknown> {
 
 const BASE_URL = import.meta.env.VITE_API_URL ?? "";
 
-// Token getter — sesuaikan dengan storage yang kamu pakai
 const getToken = (): string | null => localStorage.getItem("token");
+
+// ─── Build Query String ───────────────────────────────────────────────────────
+
+function buildQueryString(params: QueryParams): string {
+  const query = Object.entries(params)
+    .filter(([, value]) => value !== undefined && value !== null)
+    .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(String(value))}`)
+    .join("&");
+
+  return query ? `?${query}` : "";
+}
 
 // ─── Build Headers ────────────────────────────────────────────────────────────
 
@@ -35,8 +47,6 @@ function buildHeaders(
     ...extraHeaders,
   };
 
-  // Hanya set Content-Type jika bukan form-data
-  // (form-data harus dibiarkan browser set sendiri agar boundary ter-generate)
   if (contentType === "json") {
     headers["Content-Type"] = "application/json";
   }
@@ -60,7 +70,6 @@ function buildBody<TBody>(
     return JSON.stringify(body);
   }
 
-  // form-data
   if (body instanceof FormData) return body;
 
   const formData = new FormData();
@@ -82,16 +91,19 @@ async function request<TData = unknown, TBody = unknown>(
   endpoint: string,
   options: RequestOptions<TBody> = {}
 ): Promise<ApiResponse<TData>> {
-  const { headers = {}, body, contentType = "json" } = options;
+  const { headers = {}, body, contentType = "json", params } = options;
+
+  // Append query string ke URL jika ada params
+  const queryString = params ? buildQueryString(params) : "";
+  const url = `${BASE_URL}${endpoint}${queryString}`;
 
   try {
-    const response = await fetch(`${BASE_URL}${endpoint}`, {
+    const response = await fetch(url, {
       method,
       headers: buildHeaders(contentType, headers),
       body: method !== "GET" ? buildBody(body, contentType) : undefined,
     });
 
-    // Handle no content
     if (response.status === 204) {
       return { response: null, codeHttp: 204, message: "No content" };
     }
