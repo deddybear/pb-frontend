@@ -167,7 +167,7 @@ export default function ChangeEmailPage(): JSX.Element {
             <ConfirmModal
                 isOpen={confirmModal.isOpen}
                 onClose={handleCloseModal}
-                title="Konfrimasi Email"
+                title="Perubahan Email"
                 message="Anda sudah yakin dengan perubahan email anda ?"
                 variant="question"
                 confirmLabel="Ya, Ganti Email"
@@ -178,7 +178,7 @@ export default function ChangeEmailPage(): JSX.Element {
             <ConfirmModal
                 isOpen={resultModal.isOpen}
                 onClose={resultModal.close}
-                title="Status Pendaftaran"
+                title="Status Perubahan Email"
                 message={`${messageResponse}`}
                 variant="success"
                 confirmLabel="Baik"
