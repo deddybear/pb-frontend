@@ -21,7 +21,7 @@ interface ApiResponse<TData = unknown> {
 
 const BASE_URL = import.meta.env.VITE_API_URL ?? "";
 
-const getToken = (): string | null => localStorage.getItem("token");
+const getToken = (): string | null => localStorage.getItem("ab6_log_stat");
 
 // ─── Build Query String ───────────────────────────────────────────────────────
 

@@ -11,7 +11,9 @@ export function SaveSessionLogin(dataLogin: DataAccount | null | undefined | unk
 
 
     for (const [key, value] of Object.entries(dataLogin)) {
-        localStorage.setItem(key, value);
+        if (key !== "token") {
+            localStorage.setItem(key, value);
+        }
     }
 }
 
@@ -40,7 +42,7 @@ export function ClearSession(): void {
     const keys: string[] = [
         "access_level", "age", "cash", "create_time", "email",
         "experience", "gold", "nickname", "pc_cafe", "player_id",
-        "rank", "ab6_log_stat", "update_time", "username", "token",
+        "rank", "ab6_log_stat", "update_time", "username",
     ];
 
     keys.forEach((key) => localStorage.removeItem(key));

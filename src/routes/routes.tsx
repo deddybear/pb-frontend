@@ -12,12 +12,13 @@ import AuthRouteProtected from "../middlewares/auth.middleware";
 import PatchNotesPage from "../pages/patch-notes.page";
 import GuestRoute from "../middlewares/guest.middleware";
 import ShopCashPage from "../pages/dashboard/shop-cash.page";
-import ShopMedalPage from "../pages/dashboard/shop-medal.page";
+import ShopPointPage from "../pages/dashboard/shop-point.page";
 import ShopWeaponPage from "../pages/dashboard/shop-weapon.page";
 import ChangeEmailPage from "../pages/dashboard/change-email.page";
 import ChangePasswordPage from "../pages/dashboard/change-password.page";
 import ErrorBoundary, { ErrorFallbackPage } from "../pages/error.page";
 import InventoryPage from "../pages/dashboard/inventory.page";
+import ShopMedalPage from "../pages/dashboard/shop-medal.page";
 
 export const router = createBrowserRouter([
     {
@@ -52,6 +53,7 @@ export const router = createBrowserRouter([
         children: [
             { index: true, Component: DashboardPages },
             { path: "/dashboard/shop-cash", Component: ShopCashPage },
+            { path: "/dashboard/shop-point", Component: ShopPointPage },
             { path: "/dashboard/shop-medal", Component: ShopMedalPage },
             { path: "/dashboard/shop-weapon", Component: ShopWeaponPage },
             { path: "/dashboard/change-email", Component: ChangeEmailPage },

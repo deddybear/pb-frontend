@@ -8,7 +8,8 @@ import { ConfirmModal } from "../../components/modal.component";
 import { api } from "../../services/api.service";
 import type { GeneralResponse } from "../../models/response.model";
 import type { DataAccount } from "../../models/login.model";
-import { useAuth } from "../../hooks/useAuth.hook";
+// import { useAuth } from "../../hooks/useAuth.hook";
+import { SaveSessionLogin } from "../../services/session.service";
 
 export default function ChangeEmailPage(): JSX.Element {
     const { setPageTitle, dataAccount, setDescFeature } = useOutletContext<DashboardOutletContext>();
@@ -22,7 +23,7 @@ export default function ChangeEmailPage(): JSX.Element {
     const navigate = useNavigate();
     const confirmModal = useModal();
     const resultModal = useModal();
-    const { login } = useAuth();
+    // const { setDataLogin } = useAuth();
 
     if (dataAccount == null) {
         navigate("/");
@@ -77,7 +78,8 @@ export default function ChangeEmailPage(): JSX.Element {
             return "";
         }
 
-        login(response.response);
+        SaveSessionLogin(response.response);
+        // setDataLogin(response.response);
 
         return response.response.email;
     }

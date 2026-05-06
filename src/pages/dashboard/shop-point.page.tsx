@@ -3,7 +3,7 @@ import { type DashboardOutletContext } from "../../models/dashboard.model";
 import { useOutletContext, useNavigate } from "react-router";
 import { api } from "../../services/api.service";
 import { formatCurrency } from "../../utils/formater";
-import type { CashVariety, TopUpCashBody } from "../../models/cash-shop.model";
+import type { PointVariety, TopUpPointBody } from "../../models/point-shop.model";
 import { useAlert } from "../../hooks/useAlert.hook";
 import { useModal } from "../../hooks/useModal.hook";
 // import { useAuth } from "../../hooks/useAuth.hook";
@@ -13,24 +13,23 @@ import type { GeneralResponse } from "../../models/response.model";
 import type { DataAccount } from "../../models/login.model";
 import { SaveSessionLogin } from "../../services/session.service";
 
-
-export default function ShopCashPage(): JSX.Element {
+export default function ShopPointPage(): JSX.Element {
     const { setPageTitle, dataAccount, setDescFeature } = useOutletContext<DashboardOutletContext>();
     const { showAlert, AlertComponent, hideAlert } = useAlert();
-    const [cashValue, setCashValue] = useState<number>(dataAccount.cash);
+    const [pointValue, setPointValue] = useState<number>(dataAccount.gold);
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [chooseCashTopUp, setChooseCashTopUp] = useState<CashVariety>();
+    const [choosePointTopUp, setChoosePointTopUp] = useState<PointVariety>();
     const [messageResponse, setMessageResponse] = useState<string>("");
     const [messageConfrimModal, setMessageConfrimModal] = useState<string>("");
-    const listCashTopUp: CashVariety[] = [
-        { key: randomStr(32), name: "Top Up Cash 2500", value: 2500 },
-        { key: randomStr(32), name: "Top Up Cash 5000", value: 5000 },
-        { key: randomStr(32), name: "Top Up Cash 10000", value: 10000 },
-        { key: randomStr(32), name: "Top Up Cash 15000", value: 15000 },
-        { key: randomStr(32), name: "Top Up Cash 25000", value: 25000 },
-        { key: randomStr(32), name: "Top Up Cash 30000", value: 30000 },
-        { key: randomStr(32), name: "Top Up Cash 35000", value: 35000 },
-        { key: randomStr(32), name: "Top Up Cash 50000", value: 50000 }
+    const listPointTopUp: PointVariety[] = [
+        { key: randomStr(32), name: "Top Up Point 10000", value: 10000 },
+        { key: randomStr(32), name: "Top Up Point 15000", value: 15000 },
+        { key: randomStr(32), name: "Top Up Point 25000", value: 25000 },
+        { key: randomStr(32), name: "Top Up Point 30000", value: 30000 },
+        { key: randomStr(32), name: "Top Up Point 35000", value: 35000 },
+        { key: randomStr(32), name: "Top Up Point 50000", value: 50000 },
+        { key: randomStr(32), name: "Top Up Point 75000", value: 75000 },
+        { key: randomStr(32), name: "Top Up Point 90000", value: 90000 }
     ];
     const navigate = useNavigate();
     const confirmModal = useModal();
@@ -41,16 +40,17 @@ export default function ShopCashPage(): JSX.Element {
         navigate("/");
     }
 
+
     useEffect(() => {
-        setPageTitle("Shop Cash")
-        setDescFeature(`Menu untuk melakukan top-up Cash`)
+        setPageTitle("Shop Point")
+        setDescFeature(`Menu untuk melakukan top-up Point`)
     }, [setPageTitle, setDescFeature, dataAccount]);
 
     const handleCloseModal = (): void => {
         confirmModal.close();
     }
 
-    const fetchCashPlayer = async (playerId: number): Promise<number | null> => {
+    const fetchPointPlayer = async (playerId: number): Promise<number | null> => {
 
         const { codeHttp, response, message } = await api.get<GeneralResponse<DataAccount>>("/api/account/get-data", {
             params: { player_id: playerId }
@@ -67,13 +67,13 @@ export default function ShopCashPage(): JSX.Element {
 
         SaveSessionLogin(response.response)
 
-        return response.response.cash;
+        return response.response.gold;
     }
 
     const handleClickBuy = (keyTopUp: string): void => {
         hideAlert();
 
-        const keyExist = listCashTopUp.some(data => data.key === keyTopUp);
+        const keyExist = listPointTopUp.some(data => data.key === keyTopUp);
 
         if (keyExist == false) {
 
@@ -88,32 +88,32 @@ export default function ShopCashPage(): JSX.Element {
             return;
         }
 
-        const dataCashTopUp = listCashTopUp.find(data => data.key === keyTopUp);
+        const dataPointTopUp = listPointTopUp.find(data => data.key === keyTopUp);
 
-        if (dataCashTopUp === undefined) {
+        if (!dataPointTopUp) {
             showAlert({
                 variant: "error",
                 title: "Ada Kesalahan",
-                message: "data topup cash tidak ditemukan"
+                message: "data topup point tidak ditemukan"
             });
         }
 
-        setChooseCashTopUp(dataCashTopUp!)
+        setChoosePointTopUp(dataPointTopUp)
 
-        setMessageConfrimModal(`Apakah anda yakin dengan pembelian ${dataCashTopUp?.name} ?`);
+        setMessageConfrimModal(`Apakah anda yakin dengan pembelian ${dataPointTopUp?.name} ?`);
         confirmModal.open();
     }
 
-    const doTopUpCash = async (dataCashTopUp: CashVariety): Promise<void> => {
+    const doTopUpPoint = async (dataPointTopUp: PointVariety): Promise<void> => {
         setIsLoading(true);
 
-        const payload: TopUpCashBody = {
+        const payload: TopUpPointBody = {
             player_id: Number(dataAccount.player_id),
-            top_up_type: "cash",
-            value: dataCashTopUp.value
+            top_up_type: "gold",
+            value: dataPointTopUp.value
         }
 
-        const { codeHttp, response, message } = await api.patch<GeneralResponse, TopUpCashBody>("/api/shop/top-up-money", payload);
+        const { codeHttp, response, message } = await api.patch<GeneralResponse, TopUpPointBody>("/api/shop/top-up-money", payload);
 
         if (codeHttp != 200 || !response) {
             showAlert({
@@ -125,10 +125,10 @@ export default function ShopCashPage(): JSX.Element {
             return;
         }
 
-        const fetchCash = await fetchCashPlayer(Number(dataAccount.player_id));
-        const newValueCash = fetchCash == null ? dataAccount.cash : fetchCash;
-        
-        setCashValue(newValueCash);
+        const fetchPoint = await fetchPointPlayer(Number(dataAccount.player_id));
+        const newValuePoint = fetchPoint == null ? dataAccount.gold : fetchPoint;
+
+        setPointValue(newValuePoint);
         setMessageResponse(message);
         resultModal.open();
         setIsLoading(false);
@@ -140,12 +140,12 @@ export default function ShopCashPage(): JSX.Element {
         <div>
 
             <div className="flex flex-col gap-1.5">
-                {/* Cash Value */}
+                {/* Point Value */}
                 <label className="text-xs font-black uppercase tracking-widest text-zinc-400">
-                    Cash anda Ini
+                    Point anda Ini
                 </label>
                 <div className="bg-zinc-800/50 border border-zinc-700/50 rounded-sm px-4 py-3 text-zinc-500 text-sm">
-                    {formatCurrency(cashValue)}
+                    {formatCurrency(pointValue)}
                 </div>
             </div>
 
@@ -153,13 +153,13 @@ export default function ShopCashPage(): JSX.Element {
                 {AlertComponent}
             </div>
 
-            {/* Variant Cash */}
+            {/* Variant Point */}
             <div className="my-5">
                 <h1 className="text-white font-black text-1xl sm:text-2xl uppercase tracking-tight">
-                    List Cash
+                    List Point
                 </h1>
                 <div className="mt-2 grid grid-cols-4 gap-3">
-                    {listCashTopUp.map((data, index) => (
+                    {listPointTopUp.map((data, index) => (
                         <div key={index} className="bg-zinc-900 border border-zinc-800 rounded-sm p-3 text-center">
                             <p className="text-blue-400 font-black text-lg leading-none">{data.name}</p>
                             <p className="text-zinc-600 text-xs uppercase tracking-widest mt-1">{`Rp ${formatCurrency(data.value)},-`}</p>
@@ -183,18 +183,18 @@ export default function ShopCashPage(): JSX.Element {
             <ConfirmModal
                 isOpen={confirmModal.isOpen}
                 onClose={handleCloseModal}
-                title="Pembelian Cash"
+                title="Pembelian Point"
                 message={messageConfrimModal}
                 variant="question"
                 confirmLabel="Ya, Lanjutkan"
                 cancelLabel="Batal"
                 onlyCloseButton={false}
-                onConfirm={() => doTopUpCash(chooseCashTopUp!)}
+                onConfirm={() => doTopUpPoint(choosePointTopUp!)}
             />
             <ConfirmModal
                 isOpen={resultModal.isOpen}
                 onClose={resultModal.close}
-                title="Status Pembelian Cash"
+                title="Status Pembelian Point"
                 message={`${messageResponse}`}
                 variant="success"
                 confirmLabel="Baik"

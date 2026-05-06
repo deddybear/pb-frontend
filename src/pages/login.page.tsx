@@ -46,7 +46,7 @@ export function LoginPage(): JSX.Element {
         if (codeHttp != 200 || !response) {
             showAlert({
                 variant: "error",
-                title: "Terjadi Kesalahan Pada Server",
+                title: "Terjadi Kesalahan",
                 message: message
             });
             setIsLoading(false);
@@ -59,7 +59,9 @@ export function LoginPage(): JSX.Element {
     }
 
     const saveState = () => {
-        console.log(dataResponse);
+        if (!dataResponse?.response) {
+            return;
+        }
         
         SaveSessionLogin(dataResponse!.response);
         SaveSessionToken(dataResponse!.response.token);

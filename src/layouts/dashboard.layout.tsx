@@ -3,7 +3,7 @@ import { Outlet, useNavigate } from "react-router";
 import Sidebar from "../components/sidebar.component";
 import { useAuth } from "../hooks/useAuth.hook";
 import { type MenuSidebarList } from "../models/menu.model";
-import { faBagShopping, faDoorOpen, faEnvelopeOpen, faGun, faHouse, faKey, faMedal, faMoneyBill1Wave } from "@fortawesome/free-solid-svg-icons";
+import { faBagShopping, faCoins, faDoorOpen, faEnvelopeOpen, faGun, faHouse, faKey,  faMedal,  faMoneyBill1Wave } from "@fortawesome/free-solid-svg-icons";
 import BreadcrumbComponent from "../components/breadcump.component";
 
 export default function DashboardLayout(): JSX.Element {
@@ -27,8 +27,9 @@ export default function DashboardLayout(): JSX.Element {
             group: "Shop",
             items: [
                 { label: "Cash", to: "/dashboard/shop-cash", icon: faMoneyBill1Wave },
+                { label: "Point", to: "/dashboard/shop-point", icon: faCoins },
+                { label: "medal", to: "/dashboard/shop-medal", icon: faMedal },
                 { label: "Weapon", to: "/dashboard/shop-weapon", icon: faGun },
-                { label: "Medal", to: "/dashboard/shop-medal", icon: faMedal }
             ],
         },
         {
