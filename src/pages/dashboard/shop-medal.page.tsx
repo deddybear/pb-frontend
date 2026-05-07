@@ -12,9 +12,11 @@ export default function ShopMedalPage(): JSX.Element {
     const { setPageTitle, dataAccount, setDescFeature } = useOutletContext<DashboardOutletContext>();
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const { showAlert, AlertComponent, hideAlert } = useAlert();
-    const [choiceMedal, setChoiceMedal] = useState<string>("");
+    const [valueSelectMedal, setValueSelectMedal] = useState<string>("");
     const [medalValue, setMedalValue] = useState<string>("-");
+    const [messageResponse, setMessageResponse] = useState<string>("");
     const [messageConfrimModal, setMessageConfrimModal] = useState<string>("");
+    const [chooseMedalTopUp, setChooseMedalTopUp] = useState<ShopMedal>();
     const navigate = useNavigate();
     const confirmModal = useModal();
     const resultModal = useModal();
@@ -46,7 +48,7 @@ export default function ShopMedalPage(): JSX.Element {
         { key: "master_medal", name: "Master Medal", value: listMasterMedalTopUp },
     ];
 
-    const selectedMedal = ListShopMedal.find((item) => item.key === choiceMedal);
+    const medalChoose = ListShopMedal.find((item) => item.key === valueSelectMedal);
 
     const fetchDataMedalPlayer = async (valueSelected: string): Promise<string> => {
 
@@ -66,6 +68,9 @@ export default function ShopMedalPage(): JSX.Element {
         return String(response.response[valueSelected as keyof DataMedalPlayer]);
     }
 
+    const handleCloseModal = (): void => {
+        confirmModal.close();
+    }
 
     const handleChangeSelectMedal = async (e: React.ChangeEvent<HTMLSelectElement>): Promise<void> => {
         setIsLoading(true);
@@ -74,12 +79,12 @@ export default function ShopMedalPage(): JSX.Element {
         const valueSelected = e.target.value;
 
         if (valueSelected === "") {
-            setChoiceMedal("");
+            setValueSelectMedal("");
             setMedalValue("-");
             return;
         }
 
-        setChoiceMedal(valueSelected);
+        setValueSelectMedal(valueSelected);
 
         const stringNumber = await fetchDataMedalPlayer(valueSelected);
         setMedalValue(stringNumber);
@@ -89,7 +94,7 @@ export default function ShopMedalPage(): JSX.Element {
     const handleClickBuy = (keyTopUp: string): void => {
         hideAlert();
 
-        const keyExist = selectedMedal?.value.some(data => data.key === keyTopUp);
+        const keyExist = medalChoose?.value.some(data => data.key === keyTopUp);
 
         if (keyExist == false) {
 
@@ -104,9 +109,9 @@ export default function ShopMedalPage(): JSX.Element {
             return;
         }
 
-        const dataCashTopUp = selectedMedal?.value.find(data => data.key === keyTopUp);
+        const dataMedalTopUp = medalChoose?.value.find(data => data.key === keyTopUp);
 
-        if (dataCashTopUp === undefined) {
+        if (dataMedalTopUp === undefined) {
             showAlert({
                 variant: "error",
                 title: "Ada Kesalahan",
@@ -114,20 +119,21 @@ export default function ShopMedalPage(): JSX.Element {
             });
         }
 
-        setMessageConfrimModal(`Apakah anda yakin dengan pembelian ${setChoiceMedal?.name} ?`);
+        setMessageConfrimModal(`Apakah anda yakin dengan pembelian ${dataMedalTopUp?.name} ?`);
+        setChooseMedalTopUp(dataMedalTopUp);
         confirmModal.open();
     }
 
-    const doTopUpCash = async (dataCashTopUp: ShopMedal): Promise<void> => {
+    const doTopUpMedal = async (dataMedalTopUp: ShopMedal): Promise<void> => {
         setIsLoading(true);
 
         const payload: TopUpMedalBody = {
             player_id: Number(dataAccount.player_id),
-            top_up_type: "cash",
-            value: dataCashTopUp.value
+            top_up_type: dataMedalTopUp.type,
+            value: dataMedalTopUp.value
         }
 
-        const { codeHttp, response, message } = await api.patch<GeneralResponse, TopUpMedalBody>("/api/shop/top-up-money", payload);
+        const { codeHttp, response, message } = await api.patch<GeneralResponse, TopUpMedalBody>("/api/shop/top-up-medal", payload);
 
         if (codeHttp != 200 || !response) {
             showAlert({
@@ -139,10 +145,11 @@ export default function ShopMedalPage(): JSX.Element {
             return;
         }
 
-        // const fetchCash = await fetchDataMedalPlayer(choiceMedal);
-        // const newValueCash = fetchCash == null ? dataAccount.cash : fetchCash;
+        const fetchCash = await fetchDataMedalPlayer(dataMedalTopUp.type);
+        const newValueCash = fetchCash === "" ? "Gagal Load silahkan refresh" : fetchCash;
 
-        // setMessageResponse(message);
+        setMedalValue(newValueCash);
+        setMessageResponse(message);
         resultModal.open();
         setIsLoading(false);
 
@@ -156,7 +163,7 @@ export default function ShopMedalPage(): JSX.Element {
                 <label className="text-xs font-black uppercase tracking-widest text-zinc-400">
                     Silahkan Pilih Medal
                 </label>
-                <select className="bg-zinc-800/50 border border-zinc-700/50 rounded-sm px-4 py-3 text-zinc-500 text-sm" value={choiceMedal} onChange={handleChangeSelectMedal} >
+                <select className="bg-zinc-800/50 border border-zinc-700/50 rounded-sm px-4 py-3 text-zinc-500 text-sm" value={valueSelectMedal} onChange={handleChangeSelectMedal} >
                     <option className="text-zinc-950 text-sm" value="">-- Pilih Type Medal --</option>
                     {listChoiceMedal.map((medal, index) => (
                         <option className="text-zinc-950 text-sm" key={index} value={medal.value}>{medal.label}</option>
@@ -185,14 +192,14 @@ export default function ShopMedalPage(): JSX.Element {
                     List Price Medal
                 </h1>
                 <div className="mt-2 grid grid-cols-3 gap-4">
-                    {!choiceMedal ?
+                    {!valueSelectMedal ?
                         (<p className="text-zinc-500 text-sm col-span-4">
-                            Pilih type medal terlebih dahulu
+                           Silahkan Pilih medal terlebih dahulu
                         </p>) : isLoading ?
                             (<p className="text-zinc-500 text-sm col-span-4">
                                 Memuat...
                             </p>) :
-                            (selectedMedal?.value.map((data, index) => (
+                            (medalChoose?.value.map((data, index) => (
                                 <div key={index} className="bg-zinc-900 border border-zinc-800 rounded-sm p-3 text-center">
                                     <p className="text-blue-400 font-black text-lg leading-none">{data.name}</p>
                                     {/* <p className="text-zinc-600 text-xs uppercase tracking-widest mt-1">{`Rp ${formatCurrency(data.value)},-`}</p> */}
@@ -223,7 +230,7 @@ export default function ShopMedalPage(): JSX.Element {
                 confirmLabel="Ya, Lanjutkan"
                 cancelLabel="Batal"
                 onlyCloseButton={false}
-                onConfirm={() => doTopUpCash(chooseCashTopUp!)}
+                onConfirm={() => doTopUpMedal(chooseMedalTopUp!)}
             />
             <ConfirmModal
                 isOpen={resultModal.isOpen}
