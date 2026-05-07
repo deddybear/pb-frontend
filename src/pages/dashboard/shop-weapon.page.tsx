@@ -13,14 +13,12 @@ export default function ShopWeaponPage(): JSX.Element {
     }
 
     useEffect(() => {
-        setPageTitle("Shop Cash")
+        setPageTitle("Shop Weapon")
         setDescFeature(`Menu untuk melakukan pembelian senjata diperlukan untuk anda`)
     }, [setPageTitle, setDescFeature, dataAccount]);
 
     return (
         <div>
-
-
             <div className="grid place-content-center">
                 <h1 className="text-white font-black text-3xl sm:text-4xl uppercase tracking-tight">
                     Fitur masih belum tersedia
