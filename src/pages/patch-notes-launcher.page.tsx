@@ -2,7 +2,7 @@ import { type JSX } from "react";
 import { type PatchNote } from "../models/download.model";
 import { listPatchNotes } from "../models/download.model";
 
-export default function PatchNotesPage(): JSX.Element {
+export default function PatchNotesLauncherPage(): JSX.Element {
 
 
     const patchNotes: PatchNote[] = listPatchNotes;
@@ -15,11 +15,11 @@ export default function PatchNotesPage(): JSX.Element {
 
     return (
         <div className="min-h-screen bg-zinc-900 flex flex-col">
-            <main className="flex-1 pt-16">
+            <main className="flex-1 pt-4">
                 {/* ── Patch Notes ───────────────────────────────────────────────── */}
-                <section className="py-16 sm:py-20 border-b border-zinc-800">
+                <section className=" border-b border-zinc-800">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div className="mb-10">
+                        <div className="mb-4">
                             <p className="text-blue-400 text-xs font-black uppercase tracking-widest mb-2">Patch Notes</p>
                             <h2 className="text-white font-black text-3xl sm:text-4xl uppercase tracking-tight">
                                 Riwayat Update

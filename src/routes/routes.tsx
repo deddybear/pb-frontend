@@ -19,6 +19,7 @@ import ChangePasswordPage from "../pages/dashboard/change-password.page";
 import ErrorBoundary, { ErrorFallbackPage } from "../pages/error.page";
 import InventoryPage from "../pages/dashboard/inventory.page";
 import ShopMedalPage from "../pages/dashboard/shop-medal.page";
+import PatchNotesLauncherPage from "../pages/patch-notes-launcher.page";
 
 export const router = createBrowserRouter([
     {
@@ -42,6 +43,11 @@ export const router = createBrowserRouter([
             { path: "password-reset", Component: PasswordResetPage }
         ]
 
+    },
+    {
+        path: "/patch-notes-launcher",
+        Component: PatchNotesLauncherPage,
+        errorElement: <ErrorFallbackPage />,
     },
     {
         path: "/dashboard",

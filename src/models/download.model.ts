@@ -19,3 +19,16 @@ export interface InstallStep {
   desc: string;
 }
 
+
+export const listPatchNotes: PatchNote[] = [
+  {
+    version: "v3.123",
+    date: "08 September 2026",
+    type: "major",
+    changes: [
+      "Perbaikan pada Shop Cash, Shop Point, Shop Medal, dan Shop Weapon.",
+      "Fitur Battle Pass & Attedance",
+      "Dan lain lain"
+    ],
+  }
+]
